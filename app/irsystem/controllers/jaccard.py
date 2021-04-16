@@ -11,8 +11,8 @@ treebank_tokenizer = TreebankWordTokenizer()
 # drop length columns from df
 input_df = df.drop(['Length'], axis=1)
 
-# combine all columns in input_df for each row    
-sm_df = input_df['base_spirits'].map(str) + ' ' + input_df['name'].map(str) + ' ' + input_df['description'].map(str)
+# combine all columns to check against in input_df for each row    
+sm_df = input_df['base_spirits'].map(str) + ' ' + input_df['name'].map(str) + ' ' + input_df['description'].map(str) + ' ' + input_df['ingredients'].map(str)
 
 # tokenize, lowercase, and remove punctuation from sm_df
 for idx,name in enumerate(sm_df):
