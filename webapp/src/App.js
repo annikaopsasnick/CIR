@@ -1,39 +1,48 @@
 import logo from './logo.svg';
 import './App.css';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Form } from './Form.js';
+
 
 function App() {
   const [getMessage, setGetMessage] = useState({})
+  const [name, setName] = useState("myname")
+  const [netid, setNetID] = useState("myid")
 
-  useEffect( ()=>{
+  useEffect(() => {
     axios.get('/')
-    .then(response => {
-      console.log("SUCCESS", response)
-      setGetMessage(response)
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  },[])
-  
+      .then(response => {
+        console.log("SUCCESS", response)
+        setGetMessage(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [])
+
+
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <body>
+      <div className="form-container">Test
+        < Form
+        onSubmit={(x) => setName(x)}/>
+        
+        </div>
+
+        <div class="topcorner">
+          <p>Project Name: {name}</p>
+          <p>Student Names: {netid}</p>
+        </div>
+        
+
+      </body>
     </div>
+
+
   );
 }
 
