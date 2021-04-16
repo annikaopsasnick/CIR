@@ -3,22 +3,21 @@ import numpy as np
 from nltk.tokenize import TreebankWordTokenizer
 
 # load in the data
-df = pd.read_csv('data/hotaling_cocktails - Cocktails.csv')
+df = pd.read_csv('data/dataset.csv')
 
 # initalized nltk tokenizer function
 treebank_tokenizer = TreebankWordTokenizer()
 
-# drop Bartender, Bar/Company, Location columns from df
-input_df = df.drop(['Bartender', 'Bar/Company', 'Location'], axis=1)
+# drop length columns from df
+input_df = df.drop(['Length'], axis=1)
 
 # combine all columns in input_df for each row    
-sm_df = input_df['Cocktail Name'].map(str) + ' ' + input_df['Ingredients'].map(str) + ' ' + input_df['Garnish'].map(str) + ' ' + input_df['Glassware'].map(str) + ' ' + input_df['Preparation'].map(str) + ' ' + input_df['Notes'].map(str)
+sm_df = input_df['base_spirits'].map(str) + ' ' + input_df['name'].map(str) + ' ' + input_df['description'].map(str)
 
 # tokenize, lowercase, and remove punctuation from sm_df
-cocktail_names = df.iloc[:,0]
-for idx,name in enumerate(cocktail_names):
+for idx,name in enumerate(sm_df):
     tokenized_name = name.split()
-    cocktail_names[idx] = [w.lower() for w in tokenized_name if w.isalpha()]
+    sm_df[idx] = [w.lower() for w in tokenized_name if w.isalpha()]
 
 # compute jaccard comparing the query terms against sm_df
 def jaccard(input_query, input_data, num_cocktails, tokenizer=treebank_tokenizer):
@@ -42,7 +41,7 @@ def jaccard(input_query, input_data, num_cocktails, tokenizer=treebank_tokenizer
     query = [q.lower() for q in tok_list if q.isalpha()]
     
     # loop through cocktail name col and compute the jaccard similarity score
-    for idx,name in enumerate(cocktail_names):
+    for idx,name in enumerate(sm_df):
         
         # calculate num and denom for the ratio
         num = len(list(set(name).intersection(query)))
@@ -82,12 +81,11 @@ def top_scores(jac_sim):
     else:
         top_10.append(jaccard_sorted)
 
-    # get the top 10 info to print on UI
+    # get the top 10 info to print on UI (name, ingredients, description, url, image)
     top_10_info = []
     for i in top_10[0]:
         idx = i[0]  
-        top_10_info.append(input_df.iloc[idx,0])  
-    # print(input_df.iloc[idx,:], "\n")   # grabs all info
+        top_10_info.append((input_df.iloc[idx,1], input_df.iloc[idx,6], input_df.iloc[idx,4], input_df.iloc[idx,3], input_df.iloc[idx,5]) )
 
     return top_10_info
 
