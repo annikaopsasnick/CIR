@@ -19,3 +19,7 @@ code {
   padding-left: 40%;
   
 }
+img {
+  max-width: 25%;
+  height: auto
+}
