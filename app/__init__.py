@@ -26,10 +26,10 @@ app.register_blueprint(irsystem)
 # Initialize app w/SocketIO
 socketio.init_app(app)
 
-@app.route('/', methods=['GET'], defaults={'path': ''})
-@app.route('/<path:path>')
-def index(path):
-    return render_template("index.html")
+# @app.route('/', methods=['GET'], defaults={'path': ''})
+# @app.route('/<path:path>')
+# def index(path):
+#     return render_template("index.html")
 
 # HTTP error handling
 @app.errorhandler(404)
