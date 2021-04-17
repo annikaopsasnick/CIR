@@ -53,7 +53,7 @@ function App() {
         < Form
             onSubmit={(x) => {
               setName(x);
-              // updateResults(cocktail_test_list); ping the backend
+              // updateResults(cocktail_test_list); // ping the backend
 
             }
             } />

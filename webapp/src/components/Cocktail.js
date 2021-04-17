@@ -14,6 +14,9 @@ const Cocktail = (props) => {
 
   return (
     <div className="Cocktail">
+      <button onClick={() => props.setIsList(true)}
+        type="button">close</button>
+
       <h2 className="Cocktail_name">{props.name}</h2>
       <h3 className="Cocktail_sub_title">Ingredients
         </h3>
@@ -38,7 +41,8 @@ Cocktail.propTypes = {
   name: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   image_source: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired
+  rating: PropTypes.number.isRequired,
+  setIsList: PropTypes.func.isRequired,
 }
 
 export default Cocktail;

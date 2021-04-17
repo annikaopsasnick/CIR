@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 const ListItem = (props) => {
   return (
     <button onClick={() => {
-      props.isList = false
       props.ViewCocktail(props.name)
     }}>
       <h2>{props.name}</h2>

@@ -7,31 +7,37 @@ import { useState } from 'react';
 const ResultsContainer = ({ cocktails, isList }) => {
 
   const [cocktail, setCocktail] = useState({})
+  const [variant, setVariant] = useState(isList)
   // cocktails = []
 
   const ViewCocktail = (cocktail_name) => {
+    setVariant(false)
+    var prev = cocktail
     setCocktail(cocktails.find(cocktail => cocktail.name == cocktail_name));
-    console.log(cocktail);
+    console.log(prev, cocktail);
+
+
     // render the Cocktail.js
   }
 
-  var CurrentContainer;
+  var CurrentComponent;
 
-  if (isList) {
-    CurrentContainer = <CocktailList cocktails={cocktails} ViewCocktail={ViewCocktail} isList={isList} />;
+  if (variant) {
+    CurrentComponent = <CocktailList cocktails={cocktails} ViewCocktail={ViewCocktail} isList={variant} />;
   } else {
-    CurrentContainer =
+    CurrentComponent =
       <Cocktail ingredients={cocktail.ingredients}
         description={cocktail.description}
         name={cocktail.name}
         url={cocktail.url}
         image_source={cocktail.image}
-        rating={5} />
+        rating={5}
+        setIsList={setVariant} />
   }
 
   return (
     <div className="result-container">
-      {CurrentContainer}
+      {CurrentComponent}
     </div>
   )
 
