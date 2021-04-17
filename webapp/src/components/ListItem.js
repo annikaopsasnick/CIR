@@ -8,7 +8,7 @@ const ListItem = (props) => {
       props.ViewCocktail(props.name)
     }}>
       <h2>{props.name}</h2>
-      <img source={props.image_source} alt="cocktail" />
+      <img src={props.image_source} alt="cocktail" />
       <p>{props.ingredients}</p>
       <p>{props.rating}</p>
     </button>
