@@ -1,14 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Form } from './Form.js';
+import ResultsContainer from './components/ResultsContainer.js';
+
+
 
 
 function App() {
+
   const [getMessage, setGetMessage] = useState({})
   const [name, setName] = useState("myname")
   const [netid, setNetID] = useState("myid")
+  const cocktails = require('./data/dataset.json')
+  const cocktail_test_list = cocktails.slice(0, 5)
+  const [results, updateResults] = useState([])
+
+  console.log(cocktail_test_list)
+
+
+
 
   useEffect(() => {
     axios.get('/')
@@ -21,23 +32,46 @@ function App() {
       })
   }, [])
 
+  useEffect(() => {
+    axios.post('/result')
+      .then(response => {
+        console.log("RESULTS", response)
+        updateResults(response.data.cocktails)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  })
+
 
   return (
 
     <div className="App">
 
       <body>
-      <div className="form-container">Test
+        <div className="form-container">Test
         < Form
-        onSubmit={(x) => setName(x)}/>
-        
+            onSubmit={(x) => {
+              setName(x);
+              // updateResults(cocktail_test_list); ping the backend
+
+            }
+            } />
+
         </div>
 
         <div class="topcorner">
           <p>Project Name: {name}</p>
           <p>Student Names: {netid}</p>
         </div>
-        
+
+        <div className="results-container">
+          < ResultsContainer
+            cocktails={results}
+            isList={true} />
+
+        </div>
+
 
       </body>
     </div>
