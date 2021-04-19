@@ -58,6 +58,9 @@ def jaccard(input_query, input_data, indexes_include, num_cocktails, tokenizer=t
 # initalize variables for jaccard function call 
 num_cocktails = df.shape[0]
 
+# terms for filters
+iced_terms = ['iced', 'ice', 'chilled', 'frozen']
+hot_terms = ['hot', 'heated', 'warm']
 def icedHot(query, inputs, iced, hot):
     indexes_include = []
 
@@ -76,10 +79,6 @@ def icedHot(query, inputs, iced, hot):
     
     print(indexes_include)
     return jaccard(query, sm_df, indexes_include, num_cocktails, tokenizer=treebank_tokenizer)
-
-# terms for filters
-iced_terms = ['iced', 'ice', 'chilled']
-hot_terms = ['hot', 'heated', 'warm']
 
 # retrieve the top 10 most similar names to the query term
 def top_scores(jac_sim):

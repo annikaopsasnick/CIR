@@ -10,37 +10,42 @@
         </div>
         <form class="form-inline global-search">
             <h1 style="font-size: 55px; font-family:Futura; color: #4285F4">
-                C
-                <span style="color: #EA4335; ">S</span>
-                <span style="color: #FBBC05; ">4</span>
-                3
-                <span style="color: #34A853; ">0</span>
-                <span style="color: #EA4335; ">0</span>
+              <span style="color: #EA4335; font-size: 25px; font-style: oblique;"> Liver Let Die: </span>
+                <br>
+                <span style="color: darkcyan; font-weight: bold;"> Cocktail Recommender </span>
             </h1>
             
             <br><br>
             
             <div class="form-group">
-                <input id="input" type="text" name="search" class="form-control" placeholder="Your Input">
+                <input id="input" type="text" name="search" class="form-control" placeholder="Keywords">
                 <br>
-                <label for="temp">Select Temperature Preference: </label>
+                <label for="temp">Temperature Preference: </label>
                 <select name="temp" id="temp">
                   <option value="iced">Iced</option>
                   <option value="hot">Hot</option>
                   <option value="nopref" selected="selected">No Preference</option>
                 </select>
-                <!-- <input type="checkbox" id="iced" name="iced" value=True>
-                  <label for="iced">Iced</label>
-                <input type="checkbox" id="hot" name="hot" value="Hot">
-                  <label for="iced">Hot</label>
-                <input type="checkbox" id="nopref" name="nopref" value="Nopref">
-                  <label for="iced">No Preference</label> -->
                 <br>
                 <br>
-                  <!-- <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                  <label for="vehicle2"> I have a car</label><br>
-                  <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                  <label for="vehicle3"> I have a boat</label><br> -->
+                <label for="spirit">Spirit: </label>
+                <select name="spirit" id="spirit">
+                  <option value="gin">Gin</option>
+                  <option value="vodka">Vodka</option>
+                  <option value="rum">Rum</option>
+                  <option value="brandy">Brandy</option>
+                  <option value="liqueuer">Liqueuer</option>
+                  <option value="absinthe">Absinthe</option>
+                  <option value="sherry">Sherry</option>
+                  <option value="other">Other</option>
+                  <option value="nopref" selected="selected">No Preference</option>
+                </select>
+                <br>
+                <br>
+                <label for="category">Category: </label>
+                <select name="category" id="category">
+                  <option value="nopref" selected="selected">No Preference</option>
+                </select>
             </div>
             <button type="submit" class="btn btn-info"> Go! </button>
         </form>
