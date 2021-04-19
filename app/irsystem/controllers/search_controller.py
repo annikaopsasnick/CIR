@@ -22,5 +22,8 @@ def search():
 def result():
    return {'cocktails': test_cocktail_results}
 
+@irsystem.route('/query', methods=['GET', 'POST'])
+def query():
+	return 
 
 

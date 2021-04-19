@@ -21,9 +21,15 @@ const Form = ({inputs, setInputs}) => {
   }
 
   function handleSubmit(event) {
-    this.props.onSubmit(this.state.value);
+  //   this.props.onSubmit(this.state.value);
     event.preventDefault();
 
+    console.log(event)
+    console.log("in handleSubmit")
+    console.log(inputs)
+
+    axios.post("/query", {"query": inputs})
+ 
   }
     return (
       <form onSubmit={handleSubmit}>
@@ -33,7 +39,7 @@ const Form = ({inputs, setInputs}) => {
             <input type="text" name= "user_name" onChange={handleChange} />
           </label>
 
-          <input type="submit" value="Submit" />
+          <button type="submit" value="Submit">Submit</button>
         </div>
 
         <div class = "input-pair">
