@@ -31,8 +31,8 @@ const Form = ({inputs, setInputs}) => {
     console.log(event)
     console.log("in handleSubmit")
     console.log(inputs)
-    console.log(inputs.user_name)
-    console.log(inputs['user_name'])
+    // console.log(inputs.user_name)
+    // console.log(inputs['user_name'])
 
     // axios.get('/query', {data: 'testme'})
     axios.post('/query', inputs)
@@ -43,7 +43,7 @@ const Form = ({inputs, setInputs}) => {
         <div class = "input-pair">
           <label>
             Name:
-            <input type="text" name= "user_name" onChange={handleChange} />
+            <input type="text" name= "query_string" onChange={handleChange} />
           </label>
 
           <button type="submit" value="Submit">Submit</button>

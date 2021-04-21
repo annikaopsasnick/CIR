@@ -1,9 +1,16 @@
 import pandas as pd
+import os
 import numpy as np
 from nltk.tokenize import TreebankWordTokenizer
 
 # load in the data
-df = pd.read_csv('data/dataset.csv')
+data_file = os.path.join(os.path.dirname(__file__), "dataset.csv")
+print(data_file)
+print((os.getcwd()))
+df = pd.read_csv(data_file)
+
+# df = pd.read_csv("app/irsystem/controllers/dataset.csv")
+# df.head()
 
 # initalized nltk tokenizer function
 treebank_tokenizer = TreebankWordTokenizer()

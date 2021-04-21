@@ -14,7 +14,7 @@ function App() {
   const [name, setName] = useState("myname")
   const [netid, setNetID] = useState("myid")
 
-  const [inputs, setInputs] = useState({'user_name': '', 'key_word': '', 'base_spirit': '', 'ingredients': []})
+  const [inputs, setInputs] = useState({'query_string': '', 'key_word': '', 'base_spirit': '', 'ingredients': []})
 
   const cocktails = require('./data/dataset.json')
   const cocktail_test_list = cocktails.slice(0, 5)

@@ -33,6 +33,9 @@ def result():
 def queryendpoint():
 	# import pdb; pdb.set_trace()
 	query = request.get_json()
+
 	print(query)
+	
+	q = query.user_name
 	return jsonify(query = query)
 
