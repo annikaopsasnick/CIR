@@ -6,7 +6,10 @@ import { useState } from 'react';
 
 const ResultsContainer = ({ cocktails, isList }) => {
 
-  const [cocktail, setCocktail] = useState({})
+
+
+  const [cocktail, setCocktail] = useState({ 'ingredients': "", 'description': "", 'name': "", 'url': "", 'image_source': "", 'rating': 0 })
+  
   const [variant, setVariant] = useState(isList)
   // cocktails = []
 
@@ -14,7 +17,7 @@ const ResultsContainer = ({ cocktails, isList }) => {
     setVariant(false)
     var prev = cocktail
     setCocktail(cocktails.find(cocktail => cocktail.name == cocktail_name));
-    console.log(prev, cocktail);
+
 
 
     // render the Cocktail.js

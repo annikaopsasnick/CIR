@@ -39,9 +39,6 @@ def queryendpoint():
 
 	jaccard_sim = jaccard(query, sm_df, num_cocktails, treebank_tokenizer) # [score_drink0, score_drink1,]
 	top_cocktails = top_scores(jaccard_sim) # [(name, ingredients, description)]
-
-	print(query)
-	print(top_cocktails)
 	# print(jaccard_sim)
 	
 	return {'query_string': query,

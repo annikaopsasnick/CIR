@@ -10,7 +10,9 @@ import PropTypes from 'prop-types';
 
 const Cocktail = (props) => {
 
-  const ingredients = props.ingredients.map((ingredient, i) => <li key={i}>{ingredient}</li>);
+  console.log("inside cocktail", props.ingredients.split(","))
+
+  const ingredients = props.ingredients.split(",").map((ingredient, i) => <li key={i}>{ingredient}</li>);
 
   return (
     <div className="Cocktail">

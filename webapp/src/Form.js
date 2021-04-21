@@ -1,7 +1,7 @@
 //import React from 'react';
 import axios from 'axios';
 
-const Form = ({inputs, setInputs}) => {
+const Form = ({inputs, setInputs, handleSubmit}) => {
   
 //class Form extends React.Component {
   // constructor(props) {
@@ -24,27 +24,6 @@ const Form = ({inputs, setInputs}) => {
     console.log(inputs);
   }
 
-  function handleSubmit(event) {
-  //   this.props.onSubmit(this.state.value);
-    event.preventDefault();
-
-    console.log(event)
-    console.log("in handleSubmit")
-    console.log(inputs)
-    // console.log(inputs.user_name)
-    // console.log(inputs['user_name'])
-
-    // axios.get('/query', {data: 'testme'})
-    axios.post('/query', inputs)
-    .then((response) => {
-      console.log(response);
-      console.log("it works!")
-      console.log(JSON.parse(response.data.cocktails))
-    }, (error) => {
-      console.log(error);
-    });
- 
-  }
     return (
       <form onSubmit={handleSubmit}>
         <div class = "input-pair">

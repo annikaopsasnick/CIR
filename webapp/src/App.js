@@ -10,28 +10,51 @@ import ResultsContainer from './components/ResultsContainer.js';
 
 function App() {
 
-  const [getMessage, setGetMessage] = useState({})
-  const [name, setName] = useState("myname")
-  const [netid, setNetID] = useState("myid")
+  // const [getMessage, setGetMessage] = useState({})
+  // const [name, setName] = useState("myname")
+  // const [netid, setNetID] = useState("myid")
 
-  const [inputs, setInputs] = useState({'query_string': '', 'key_word': '', 'base_spirit': '', 'ingredients': []})
+  const [inputs, setInputs] = useState({ 'query_string': '', 'key_word': '', 'base_spirit': '', 'ingredients': [] })
 
-  const cocktails = require('./data/dataset.json')
-  const cocktail_test_list = cocktails.slice(0, 5)
+  // const cocktails = require('./data/dataset.json')
+  // const cocktail_test_list = cocktails.slice(0, 5)
+
   const [results, updateResults] = useState([])
 
-  console.log(cocktail_test_list)
+  // console.log(cocktail_test_list)
 
-  useEffect(() => {
-    axios.get('/')
-      .then(response => {
-        console.log("SUCCESS", response)
-        setGetMessage(response)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }, [])
+  // useEffect(() => {
+  //   axios.get('/')
+  //     .then(response => {
+  //       console.log("SUCCESS", response)
+  //       setGetMessage(response)
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //     })
+  // }, [])
+
+  const handleSubmit = (event) => {
+    //   this.props.onSubmit(this.state.value);
+    event.preventDefault();
+
+    console.log(event)
+    console.log("in handleSubmit")
+    console.log(inputs)
+    // console.log(inputs.user_name)
+    // console.log(inputs['user_name'])
+
+    // axios.get('/query', {data: 'testme'})
+    axios.post('/query', inputs)
+      .then((response) => {
+        console.log(response);
+        console.log("it works!")
+        var cocktail_results = JSON.parse(response.data.cocktails)
+        updateResults(cocktail_results, () => console.log("results", results))
+      }, (error) => {
+        console.log(error);
+      });
+  }
 
   // useEffect(() => {
   //   axios.post('/result')
@@ -52,19 +75,18 @@ function App() {
       <body>
         <div className="form-container">Test
         < Form
-        inputs= {inputs} 
-        setInputs = {setInputs}
-     
+            inputs={inputs}
+            setInputs={setInputs}
+            handleSubmit={handleSubmit}
+          />
 
-        onSubmit={(x) => setName(x)}/>
-        
         </div>
 
-        <div class="topcorner">
+        {/* <div class="topcorner">
           <p>Project Name: {name}</p>
           <p>Student Names: {netid}</p>
 
-        </div>
+        </div> */}
 
         <div className="results-container">
           < ResultsContainer
