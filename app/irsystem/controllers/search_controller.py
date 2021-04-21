@@ -22,8 +22,11 @@ def search():
 def result():
    return {'cocktails': test_cocktail_results}
 
-@irsystem.route('/query', methods=['GET', 'POST'])
-def query():
-	return 
+@irsystem.route('/query', methods=['POST'])
+def queryendpoint():
+	# import pdb; pdb.set_trace()
+	query = request.get_json()
+	print(query)
+	return jsonify(query = query)
 
 

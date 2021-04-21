@@ -14,7 +14,7 @@ function App() {
   const [name, setName] = useState("myname")
   const [netid, setNetID] = useState("myid")
 
-  const [inputs, setInputs] = useState({'user_name': '', 'key_words': '', 'base_spirit': 'vodka', 'ingredients': ['gin', 'lemon']})
+  const [inputs, setInputs] = useState({'user_name': '', 'key_word': '', 'base_spirit': '', 'ingredients': []})
 
   const cocktails = require('./data/dataset.json')
   const cocktail_test_list = cocktails.slice(0, 5)
@@ -33,16 +33,16 @@ function App() {
       })
   }, [])
 
-  useEffect(() => {
-    axios.post('/result')
-      .then(response => {
-        console.log("RESULTS", response)
-        updateResults(response.data.cocktails)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  })
+  // useEffect(() => {
+  //   axios.post('/result')
+  //     .then(response => {
+  //       console.log("RESULTS", response)
+  //       updateResults(response.data.cocktails)
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //     })
+  // })
 
 
   return (

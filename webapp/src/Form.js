@@ -1,4 +1,6 @@
 //import React from 'react';
+import axios from 'axios';
+
 const Form = ({inputs, setInputs}) => {
   
 //class Form extends React.Component {
@@ -14,6 +16,8 @@ const Form = ({inputs, setInputs}) => {
    // this.setState({ value: key.target.value });
    let key = e.target.name;
    let value = e.target.value;
+   // add checkbox - detect deselect
+    console.log(e.target)
     inputs[key]= value;
     setInputs({...inputs});
     
@@ -27,8 +31,11 @@ const Form = ({inputs, setInputs}) => {
     console.log(event)
     console.log("in handleSubmit")
     console.log(inputs)
+    console.log(inputs.user_name)
+    console.log(inputs['user_name'])
 
-    axios.post("/query", {"query": inputs})
+    // axios.get('/query', {data: 'testme'})
+    axios.post('/query', inputs)
  
   }
     return (
@@ -69,14 +76,14 @@ const Form = ({inputs, setInputs}) => {
 
         <label class="switch">
           Mocktail?
-          <input id="mock" type="checkbox"/>
+          <input id="mock" name="mocktail" type="checkbox" onChange={handleChange}/>
           <span class="slider round"></span>
         </label>
         
 
         <label class="switch">
           Iced?
-          <input id="ice" type="checkbox"/>
+          <input id="ice" name="ice" type="checkbox" onChange={handleChange}/>
           <span class="slider round"></span>
         </label>
         
