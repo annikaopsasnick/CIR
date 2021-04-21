@@ -32,10 +32,19 @@ def result():
 @irsystem.route('/query', methods=['POST'])
 def queryendpoint():
 	# import pdb; pdb.set_trace()
-	query = request.get_json()
+	inputs = request.get_json()
+	print("here on backend",inputs)
+	
+	query = inputs['query_string']
+
+	jaccard_sim = jaccard(query, sm_df, num_cocktails, treebank_tokenizer) # [score_drink0, score_drink1,]
+	top_cocktails = top_scores(jaccard_sim) # [(name, ingredients, description)]
 
 	print(query)
+	print(top_cocktails)
+	# print(jaccard_sim)
 	
-	q = query.user_name
-	return jsonify(query = query)
+	return {'query_string': query,
+	'cocktails': top_cocktails }
+	
 

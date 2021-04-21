@@ -90,9 +90,20 @@ def top_scores(jac_sim):
 
     # get the top 10 info to print on UI (name, ingredients, description, url, image)
     top_10_info = []
-    for i in top_10[0]:
-        idx = i[0]  
-        top_10_info.append((input_df.iloc[idx,1], input_df.iloc[idx,6], input_df.iloc[idx,4], input_df.iloc[idx,3], input_df.iloc[idx,5]) )
 
-    return top_10_info
+    top_10_idx = [idx[0] for idx in top_10[0]]
+    top_10_df = input_df.iloc[top_10_idx, :]
+    top_10_json = top_10_df.to_json(orient='records')
+
+    print(len(top_10_json))
+
+    # for i in top_10[0]:
+    #     idx = i[0]
+    #     info = {}
+    #     input_df[loc]
+    #     top_10_info.append((input_df.iloc[idx,1], input_df.iloc[idx,6], input_df.iloc[idx,4], input_df.iloc[idx,3], input_df.iloc[idx,5]) )
+    return top_10_json
+
+
+
 

@@ -36,13 +36,20 @@ const Form = ({inputs, setInputs}) => {
 
     // axios.get('/query', {data: 'testme'})
     axios.post('/query', inputs)
+    .then((response) => {
+      console.log(response);
+      console.log("it works!")
+      console.log(JSON.parse(response.data.cocktails))
+    }, (error) => {
+      console.log(error);
+    });
  
   }
     return (
       <form onSubmit={handleSubmit}>
         <div class = "input-pair">
           <label>
-            Name:
+            Search:
             <input type="text" name= "query_string" onChange={handleChange} />
           </label>
 
