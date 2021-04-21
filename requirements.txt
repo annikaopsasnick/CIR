@@ -39,6 +39,7 @@ nltk==3.4.5
 numpy==1.18.1
 packaging==20.1
 pipenv==2020.11.15
+pandas==1.2.4
 psycopg2==2.7.7
 pycodestyle==2.7.0
 pycparser==2.19
