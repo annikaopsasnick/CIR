@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const ListItem = (props) => {
   return (
     <button onClick={() => {
-      props.ViewCocktail(props.name)
+      props.ViewCocktail(props.name) // open specific cocktail details
     }}>
       <h2>{props.name}</h2>
       <img src={props.image_source} alt="cocktail" />
@@ -14,7 +14,6 @@ const ListItem = (props) => {
   )
 
 }
-
 
 ListItem.propTypes = {
   ingredients: PropTypes.array.isRequired,

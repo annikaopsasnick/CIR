@@ -1,20 +1,17 @@
-import axios from 'axios';
+
 
 const Form = ({inputs, setInputs, handleSubmit}) => {
 
-
-
+  // change input object based on user actions
   function handleChange(e) { //output 
    let key = e.target.name;
    let value = e.target.value;
-   // add checkbox - detect deselect
-    console.log(e.target)
     inputs[key]= value;
     setInputs({...inputs});
-    
     console.log(inputs);
   }
 
+  // change input object for checkbox selection/de-selection
   function handleChecked(e) {
     let isChecked = e.target.checked
     let key = e.target.name
@@ -72,9 +69,6 @@ const Form = ({inputs, setInputs, handleSubmit}) => {
           <input id="ice" name="ice" type="checkbox" onChange={handleChecked}/>
           <span class="slider round"></span>
         </label>
-        
-
-
       </form>
     );
   }

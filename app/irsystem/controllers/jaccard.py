@@ -5,12 +5,9 @@ from nltk.tokenize import TreebankWordTokenizer
 
 # load in the data
 data_file = os.path.join(os.path.dirname(__file__), "dataset.csv")
-print(data_file)
-print((os.getcwd()))
+# print(data_file)
+# print((os.getcwd()))
 df = pd.read_csv(data_file)
-
-# df = pd.read_csv("app/irsystem/controllers/dataset.csv")
-# df.head()
 
 # initalized nltk tokenizer function
 treebank_tokenizer = TreebankWordTokenizer()
@@ -67,7 +64,7 @@ num_cocktails = df.shape[0]
 
 # retrieve the top 10 most similar names to the query term
 def top_scores(jac_sim):
-    """Return a list of tuples (index, score) containing the top ten jaccard similarity scores
+    """Return a list of row object where key is the column name, containing the top ten jaccard similarity scores
     
     Params: {jac_sim: np.ndarray}
     Returns: List

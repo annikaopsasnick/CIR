@@ -1,36 +1,31 @@
 
 import PropTypes from 'prop-types';
-// import { Image as ImageNative } from 'react-native';
-
-
-// const Image = ({ style, source }) => (
-//   <ImageNative source={source} style={style} />
-// );
-
 
 const Cocktail = (props) => {
 
-  console.log("inside cocktail", props.ingredients.split(","))
-
-  const ingredients = props.ingredients.split(",").map((ingredient, i) => <li key={i}>{ingredient}</li>);
+  // remove brackets and convert string to list 
+  var ingredient_list = props.ingredients.replace(/[\[\]']+/g, '').split(",")
+  // construct list items from ingredients
+  const ingredients = ingredient_list.map((ingredient, i) => <li key={i}>{ingredient}</li>);
 
   return (
     <div className="Cocktail">
-      <button onClick={() => props.setIsList(true)}
+
+      <button onClick={() => props.setIsList(true)} //close back to list view
         type="button">close</button>
 
       <h2 className="Cocktail_name">{props.name}</h2>
-      <h3 className="Cocktail_sub_title">Ingredients
-        </h3>
+      <h2 className="Cocktail_rating">{props.rating}</h2>
+      <h3 className="Cocktail_sub_title">Ingredients</h3>
       <ul className="Cocktail_ingredients">
         {ingredients}
       </ul>
-      <h3 className="Cocktail_sub_title">Description
-        </h3>
+      <h3 className="Cocktail_sub_title">Description</h3>
       <p>{props.description}</p>
       <h4 className="Cocktail_reference">Reference:</h4>
-      <p>{props.url}</p>
+      < p>{props.url}</p>
       <img className="Cocktail_image" src={props.image_source} alt="cocktail"></img>
+
     </div>
   )
 
