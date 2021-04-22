@@ -91,9 +91,8 @@ Formating for Right Portion of Page Results
 
 .right .results-container {
   display: block;
-  background-color: #f3e7f16f;
   margin: 2%;
-  margin-top: 20%; 
+  /* margin-top: 20%;  */
 }
 
 .CocktailList {
@@ -104,8 +103,9 @@ Formating for Right Portion of Page Results
   margin: 7% 5% 7% 5%;
   position: relative;
   overflow-y: scroll;
-  max-height: 600px;
+  max-height: 550px;
 }
+
 
 .cocktailList li {
   width: 100%;
@@ -118,6 +118,15 @@ padding-bottom: 5px;
   color: #ffffff;
   padding: 0px;
   margin: 0px;
+}
+
+ul {
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
+.Cocktail {
+  background-color: #f3e7f16f;
 }
 
 

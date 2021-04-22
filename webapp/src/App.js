@@ -12,6 +12,7 @@ function App() {
 
   const [inputs, setInputs] = useState(default_input)
   const [results, updateResults] = useState([])
+  const [initialPage, updateInitialPage] = useState(true)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,11 +21,18 @@ function App() {
         console.log(response); // recieve relevant list of cocktails 
         console.log("it works!")
         var cocktail_results = JSON.parse(response.data.cocktails)
+        updateInitialPage(false)
         updateResults(cocktail_results, () => console.log("results", results))
       }, (error) => {
         console.log(error);
       });
   }
+
+  let result_contents = (results.length != 0 & !initialPage) ?
+    < ResultsContainer cocktails={results} isList={true} /> :
+    (initialPage) ? <div className="first-render"></div> :
+      <div className="no-results">No cocktails found</div>
+
 
   return (
 
@@ -47,14 +55,9 @@ function App() {
           </div>
           <div className="right">
             <div className="results-container">
-              < ResultsContainer
-                cocktails={results}
-                isList={true}
-              />
-
+              {result_contents}
+              {/* < ResultsContainer cocktails={results} isList={true} /> */}
             </div>
-
-
 
 
           </div>
