@@ -1,19 +1,10 @@
-//import React from 'react';
 import axios from 'axios';
 
 const Form = ({inputs, setInputs, handleSubmit}) => {
-  
-//class Form extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { value: '' };
 
-  //   this.handleChange = this.handleChange.bind(this);
-  //   this.handleSubmit = this.handleSubmit.bind(this);
-  // }
+
 
   function handleChange(e) { //output 
-   // this.setState({ value: key.target.value });
    let key = e.target.name;
    let value = e.target.value;
    // add checkbox - detect deselect
@@ -21,6 +12,15 @@ const Form = ({inputs, setInputs, handleSubmit}) => {
     inputs[key]= value;
     setInputs({...inputs});
     
+    console.log(inputs);
+  }
+
+  function handleChecked(e) {
+    let isChecked = e.target.checked
+    let key = e.target.name
+    let value = isChecked
+    inputs[key]= value;
+    setInputs({...inputs});
     console.log(inputs);
   }
 
@@ -49,8 +49,8 @@ const Form = ({inputs, setInputs, handleSubmit}) => {
             Base Spirit: 
           </label>
 
-          <select id="base_spirit">
-            <option value= {inputs.base_spirit} selected>--Please choose a base spirit--</option>
+          <select id="base_spirit" name="base_spirit" onChange={handleChange}>
+            <option value= {inputs.base_spirit} >--Please choose a base spirit--</option>
             <option value="vodka">Vodka</option>
             <option value ="tequila">Tequila</option>
             <option value ="gin">Gin</option>
@@ -62,14 +62,14 @@ const Form = ({inputs, setInputs, handleSubmit}) => {
 
         <label class="switch">
           Mocktail?
-          <input id="mock" name="mocktail" type="checkbox" onChange={handleChange}/>
+          <input id="mock" name="mocktail" type="checkbox" onChange={handleChecked}/>
           <span class="slider round"></span>
         </label>
         
 
         <label class="switch">
           Iced?
-          <input id="ice" name="ice" type="checkbox" onChange={handleChange}/>
+          <input id="ice" name="ice" type="checkbox" onChange={handleChecked}/>
           <span class="slider round"></span>
         </label>
         
