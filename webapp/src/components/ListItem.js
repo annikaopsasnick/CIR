@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 
 const ListItem = (props) => {
   return (
-    <button onClick={() => {
-      props.ViewCocktail(props.name) // open specific cocktail details
-    }}>
-      <h2>{props.name}</h2>
-      <img src={props.image_source} alt="cocktail" />
-      <p>{props.ingredients}</p>
-      <p>{props.rating}</p>
-    </button>
+    <li>
+      <button onClick={() => {
+        props.ViewCocktail(props.name) // open specific cocktail details
+      }}>
+        <h2>{props.name}</h2>
+        <img src={props.image_source} alt="cocktail" />
+        <p>{props.ingredients}</p>
+        <p>{props.rating}</p>
+      </button>
+    </li>
   )
 
 }

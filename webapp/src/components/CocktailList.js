@@ -4,17 +4,19 @@ import PropTypes from 'prop-types';
 
 const CocktailList = ({ cocktails, ViewCocktail, isList }) => {
   return (
-    <>
-      {cocktails.map((c, index) =>
-        <ListItem key={index}
-          ingredients={c.ingredients}
-          name={c.name}
-          image_source={c.image}
-          rating={c.rating}
-          ViewCocktail={ViewCocktail}
-          isList={isList} />
-      )}
-    </>
+    <div className="CocktailList">
+      <ul className="list">
+        {cocktails.map((c, index) =>
+          <ListItem key={index}
+            ingredients={c.ingredients}
+            name={c.name}
+            image_source={c.image}
+            rating={c.rating}
+            ViewCocktail={ViewCocktail}
+            isList={isList} />
+        )}
+      </ul>
+    </div>
   )
 
 }

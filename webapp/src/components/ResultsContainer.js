@@ -38,9 +38,9 @@ const ResultsContainer = ({ cocktails, isList }) => {
   }
 
   return (
-    <div className="result-container">
+    <>
       {CurrentComponent}
-    </div>
+    </>
   )
 
 }

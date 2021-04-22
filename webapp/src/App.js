@@ -16,7 +16,7 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post('/query', inputs) // send inputs to backend
-      .then((response) => { 
+      .then((response) => {
         console.log(response); // recieve relevant list of cocktails 
         console.log("it works!")
         var cocktail_results = JSON.parse(response.data.cocktails)
@@ -31,22 +31,34 @@ function App() {
     <div className="App">
 
       <body>
-        <div className="form-container">Test
-        < Form
-            inputs={inputs}
-            setInputs={setInputs}
-            handleSubmit={handleSubmit}
-          />
+        <section className="container">
 
-        </div>
+          <div className="left">
+            <h1 id="title">What is your cocktail order?</h1>
+            <div className="form-container">
+              < Form
+                inputs={inputs}
+                setInputs={setInputs}
+                handleSubmit={handleSubmit}
+              />
 
-        <div className="results-container">
-          < ResultsContainer
-            cocktails={results}
-            isList={true}
-          />
+            </div>
 
-        </div>
+          </div>
+          <div className="right">
+            <div className="results-container">
+              < ResultsContainer
+                cocktails={results}
+                isList={true}
+              />
+
+            </div>
+
+
+
+
+          </div>
+        </section>
       </body>
     </div>
 
