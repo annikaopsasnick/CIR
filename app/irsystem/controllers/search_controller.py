@@ -6,6 +6,12 @@ from app.irsystem.controllers.jaccard import *
 project_name = "Liver Let Die - Personalized Cocktail Recommendations"
 net_id = "Annika Opsasnick (aro42), Callie Aboaf (cha46), Kaysie Yu (ky276), Simran Puri (sp2262), Yunyun Wang (yw458)"
 
+	
+@irsystem.route('/', methods=['GET'])
+# function that generates everything on index.html
+def search():
+	return render_template('index.html', name=project_name, netid=net_id)
+
 @irsystem.route('/query', methods=['POST'])
 def queryendpoint():
 	# import pdb; pdb.set_trace()
@@ -24,24 +30,7 @@ def queryendpoint():
 
 
 
-"""
-@irsystem.route('/', methods=['GET'])
 
-# function that generates everything on search.html
-def search():
-	query = request.args.get('search')
-
-	jaccard_sim = jaccard(query, sm_df, num_cocktails, treebank_tokenizer)
-	scores = top_scores(jaccard_sim)
-	
-	if not query:
-		data = []
-		output_message = ''
-	else:
-		output_message = "Your search: " + query
-		data = range(5)
-	return render_template('index.html', name=project_name, netid=net_id, output_message=output_message, data=data)
-"""
 
 
 	"""
