@@ -43,7 +43,6 @@ def queryendpoint():
 
   return {
     'query_string': query,
-    'temp': temp_pref,
     'cocktails': top_cocktails
   }
 
