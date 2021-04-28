@@ -30,7 +30,7 @@ def queryendpoint():
     iced_filter = True
   if temp_pref == "hot":
     hot_filter = True
-
+    
   print(iced_filter, hot_filter)
   if (not iced_filter and not hot_filter):
     ranked = jaccard(query, sm_df, [i for i in range(len(sm_df))], num_cocktails, treebank_tokenizer) # [score_drink0, score_drink1,]
