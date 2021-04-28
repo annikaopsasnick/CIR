@@ -28,8 +28,6 @@ const Form = ({inputs, setInputs, handleSubmit}) => {
             Search:
             <input type="text" name= "query_string" onChange={handleChange} />
           </label>
-
-          <button type="submit" value="Submit">Submit</button>
         </div>
 
         <div class = "input-pair">
@@ -57,18 +55,20 @@ const Form = ({inputs, setInputs, handleSubmit}) => {
           </select>
         </div>
 
-        <label class="switch">
+        {/* <label class="switch">
           Mocktail?
           <input id="mock" name="mocktail" type="checkbox" onChange={handleChecked}/>
           <span class="slider round"></span>
-        </label>
-        
-
-        <label class="switch">
-          Iced?
-          <input id="ice" name="ice" type="checkbox" onChange={handleChecked}/>
-          <span class="slider round"></span>
-        </label>
+        </label> */}
+        <div class = "input-pair">
+          <label for="temp">Temperature Preference: </label>
+          <select name="temp" id="temp" onChange={handleChange}>
+            <option value="iced">Iced</option>
+            <option value="hot">Hot</option>
+            <option value="nopref" selected="selected">No Preference</option>
+          </select>
+        </div>
+        <button type="submit" value="Submit">Submit</button>
       </form>
     );
   }

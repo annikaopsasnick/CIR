@@ -8,7 +8,7 @@ import ResultsContainer from './components/ResultsContainer.js';
 
 function App() {
 
-  const default_input = { 'query_string': '', 'key_word': '', 'base_spirit': '', 'ingredients': [], 'ice': false, 'mocktail': false }
+  const default_input = { 'query_string': '', 'key_word': '', 'base_spirit': '', 'ingredients': [], 'temp': 'nopref' }
 
   const [inputs, setInputs] = useState(default_input)
   const [results, updateResults] = useState([])

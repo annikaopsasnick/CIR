@@ -12,8 +12,7 @@ df = pd.read_csv(data_file)
 # initalized nltk tokenizer function
 treebank_tokenizer = TreebankWordTokenizer()
 
-# drop length columns from df
-input_df = df.drop(['Length'], axis=1)
+input_df = df
 
 # combine all columns to check against in input_df for each row    
 sm_df = input_df['base_spirits'].map(str) + ' ' + input_df['name'].map(str) + ' ' + input_df['description'].map(str) + ' ' + input_df['ingredients'].map(str)
@@ -23,8 +22,7 @@ for idx,name in enumerate(sm_df):
     tokenized_name = name.split()
     sm_df[idx] = [w.lower() for w in tokenized_name if w.isalpha()]
 
-# compute jaccard comparing the query terms against sm_df
-def jaccard(input_query, input_data, num_cocktails, tokenizer=treebank_tokenizer):
+def jaccard(input_query, input_data, indexes_include, num_cocktails, tokenizer=treebank_tokenizer):
     """Return a list of length num_cocktails where index i is the Jaccard 
     similarity between the query terms and the cocktail name
     
@@ -46,18 +44,43 @@ def jaccard(input_query, input_data, num_cocktails, tokenizer=treebank_tokenizer
     
     # loop through cocktail name col and compute the jaccard similarity score
     for idx,name in enumerate(sm_df):
-        
-        # calculate num and denom for the ratio
-        num = len(list(set(name).intersection(query)))
-        denom = len(list(set(name).union(query)))
-        
-        if denom != 0:   # include in case the union of two sets is nothing
-            ratio = num/denom
+        if idx in indexes_include:
+          # calculate num and denom for the ratio
+          num = len(list(set(name).intersection(query)))
+          denom = len(list(set(name).union(query)))
+          
+          if denom != 0:   # include in case the union of two sets is nothing
+              ratio = num/denom
 
-            # update the jac_sim ndarray with the jaccard similarity score
-            jac_sim[0,idx] = ratio
+              # update the jac_sim ndarray with the jaccard similarity score
+              jac_sim[0,idx] = ratio
         
     return jac_sim
+
+# initalize variables for jaccard function call 
+num_cocktails = df.shape[0]
+
+# terms for filters
+iced_terms = ['iced', 'ice', 'chilled', 'frozen']
+hot_terms = ['hot', 'heated', 'warm']
+def icedHot(query, inputs, iced, hot):
+    indexes_include = []
+
+    for idx,drink in enumerate(inputs):
+        include = False
+        if iced == True:
+            for term in inputs[idx]:
+                if term in iced_terms:
+                    include = True
+        if hot == True:
+            for term in inputs[idx]:
+                if term in hot_terms:
+                    include = True
+        if include == True:
+            indexes_include.append(idx)
+    
+    print(indexes_include)
+    return jaccard(query, sm_df, indexes_include, num_cocktails, tokenizer=treebank_tokenizer)
 
 # initalize variables for jaccard function call 
 num_cocktails = df.shape[0]
