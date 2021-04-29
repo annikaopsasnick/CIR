@@ -1,61 +1,48 @@
 import pandas as pd
 import os
 import numpy as np
+import nltk
+import re
 from nltk.tokenize import TreebankWordTokenizer
+from nltk.corpus import stopwords
 
-# load in the data
-data_file = os.path.join(os.path.dirname(__file__), "dataset.csv")
-# print(data_file)
-# print((os.getcwd()))
-df = pd.read_csv(data_file)
+from .jaccard_helper import df, tokenized_df,sim_feature_weights, clean_query
 
 # initalized nltk tokenizer function
 treebank_tokenizer = TreebankWordTokenizer()
 
-input_df = df
+def score(terms,query):
+    num = len(list(set(terms).intersection(query)))
+    denom = len(list(set(terms).union(query)))
+    score = 0 if denom == 0 else num/denom
+    return score
 
-# combine all columns to check against in input_df for each row    
-sm_df = input_df['base_spirits'].map(str) + ' ' + input_df['name'].map(str) + ' ' + input_df['description'].map(str) + ' ' + input_df['ingredients'].map(str)
+def weight_score(row,weights,query):
+    for col_name, weight in weights.items():
+        j_score = score(row[col_name],query)  
+        row[col_name] = weights[col_name] * j_score
+    return row 
 
-# tokenize, lowercase, and remove punctuation from sm_df
-for idx,name in enumerate(sm_df):
-    tokenized_name = name.split()
-    sm_df[idx] = [w.lower() for w in tokenized_name if w.isalpha()]
 
-def jaccard(input_query, input_data, indexes_include, num_cocktails, tokenizer=treebank_tokenizer):
-    """Return a list of length num_cocktails where index i is the Jaccard 
-    similarity between the query terms and the cocktail name
+def jaccard(input_query, input_df, weights, indexes, tokenizer=treebank_tokenizer):
+    """Return a list of length num_cocktails where index i is the weighted sum of Jaccard 
+    similarities between the query terms and columns in the data
     
-    Params: {query: String,
-             data: Pandas df,
-             num_cocktails: Integer,
+    Params: {input_query: String,
+             input_df: Pandas df,
+             weights: dict,
              tokenizer: a TreebankWordTokenizer}
     Returns: np.ndarray
     """
-    
-    # initialize array that will contain similarity scores
-    jac_sim = np.zeros((1, num_cocktails))
-    
-    # tokenize, lowercase, and remove punctuation from input_query 
-    input_query = str(input_query)
-    tok_list = tokenizer.tokenize(input_query)
-    
-    query = [q.lower() for q in tok_list if q.isalpha()]
-    
-    # loop through cocktail name col and compute the jaccard similarity score
-    for idx,name in enumerate(sm_df):
-        if idx in indexes_include:
-          # calculate num and denom for the ratio
-          num = len(list(set(name).intersection(query)))
-          denom = len(list(set(name).union(query)))
-          
-          if denom != 0:   # include in case the union of two sets is nothing
-              ratio = num/denom
+    # input_df = input_df.iloc[indexes, :]
+    query = clean_query(input_query, tokenizer)
 
-              # update the jac_sim ndarray with the jaccard similarity score
-              jac_sim[0,idx] = ratio
-        
-    return jac_sim
+#     display(input_df)
+    weighted_score_df = input_df.apply(weight_score,args=(weights,query,), axis=1)
+#     display(weighted_score_df)
+    jac_sim = weighted_score_df.sum(axis = 1, skipna = True) # add up jaccard scores
+    
+    return jac_sim.to_numpy()
 
 # initalize variables for jaccard function call 
 num_cocktails = df.shape[0]
@@ -80,7 +67,7 @@ def icedHot(query, inputs, iced, hot):
             indexes_include.append(idx)
     
     print(indexes_include)
-    return jaccard(query, sm_df, indexes_include, num_cocktails, tokenizer=treebank_tokenizer)
+    return jaccard(query, tokenized_df.copy(), indexes_include, sim_feature_weights, tokenizer=treebank_tokenizer)
 
 # initalize variables for jaccard function call 
 num_cocktails = df.shape[0]
@@ -95,7 +82,7 @@ def top_scores(jac_sim):
 
     # map the scores to the index in a list of tuples
     jaccard_scores = []
-    for idx,score in enumerate(jac_sim[0]):
+    for idx,score in enumerate(jac_sim):
         jaccard_scores.append((idx,score))
         
     # sort scores in ascending order
@@ -110,7 +97,7 @@ def top_scores(jac_sim):
 
     # get the top 10 info to print on UI (name, ingredients, description, url, image)
     top_10_idx = [idx[0] for idx in top_10[0]]
-    top_10_df = input_df.iloc[top_10_idx, :]
+    top_10_df = df.iloc[top_10_idx, :]
     top_10_json = top_10_df.to_json(orient='records')
 
     return top_10_json
