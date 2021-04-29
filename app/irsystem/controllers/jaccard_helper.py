@@ -53,5 +53,10 @@ def clean_query(input_query, tokenizer):
 # global variables accessible to jaccard.py
 # input_df = df
 tokenized_df = clean_data(df)
+n_cocktails, n_cols = tokenized_df.shape
+sm_df = tokenized_df.copy()
+sm_df['combined'] = sm_df['base_spirits']+ sm_df['name'] + sm_df['description'] + sm_df['ingredients']
+sm_df = sm_df['combined']
+
 
 

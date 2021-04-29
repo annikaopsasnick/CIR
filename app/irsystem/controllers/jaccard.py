@@ -6,7 +6,7 @@ import re
 from nltk.tokenize import TreebankWordTokenizer
 from nltk.corpus import stopwords
 
-from .jaccard_helper import df, tokenized_df,sim_feature_weights, clean_query
+from .jaccard_helper import df, tokenized_df,sim_feature_weights, clean_query, n_cocktails, sm_df
 
 # initalized nltk tokenizer function
 treebank_tokenizer = TreebankWordTokenizer()
@@ -31,10 +31,13 @@ def jaccard(input_query, input_df, weights, indexes, tokenizer=treebank_tokenize
     Params: {input_query: String,
              input_df: Pandas df,
              weights: dict,
+             indexes: list,
              tokenizer: a TreebankWordTokenizer}
     Returns: np.ndarray
     """
-    # input_df = input_df.iloc[indexes, :]
+    # TODO: make compatible with indexes 
+    input_df = input_df.iloc[indexes, :]
+    print(input_df)
     query = clean_query(input_query, tokenizer)
 
 #     display(input_df)
@@ -42,7 +45,7 @@ def jaccard(input_query, input_df, weights, indexes, tokenizer=treebank_tokenize
 #     display(weighted_score_df)
     jac_sim = weighted_score_df.sum(axis = 1, skipna = True) # add up jaccard scores
     
-    return jac_sim.to_numpy()
+    return jac_sim
 
 # initalize variables for jaccard function call 
 num_cocktails = df.shape[0]
@@ -67,7 +70,7 @@ def icedHot(query, inputs, iced, hot):
             indexes_include.append(idx)
     
     print(indexes_include)
-    return jaccard(query, tokenized_df.copy(), indexes_include, sim_feature_weights, tokenizer=treebank_tokenizer)
+    return jaccard(query, tokenized_df.copy(),sim_feature_weights, indexes_include,  tokenizer=treebank_tokenizer)
 
 # initalize variables for jaccard function call 
 num_cocktails = df.shape[0]
@@ -82,7 +85,8 @@ def top_scores(jac_sim):
 
     # map the scores to the index in a list of tuples
     jaccard_scores = []
-    for idx,score in enumerate(jac_sim):
+    for idx,score in jac_sim.iteritems():
+        print(idx,score)
         jaccard_scores.append((idx,score))
         
     # sort scores in ascending order

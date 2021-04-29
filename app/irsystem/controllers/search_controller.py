@@ -21,7 +21,7 @@ def queryendpoint():
 	
   query = inputs['query_string']
 
-  """
+ 
   temp_pref = inputs['temp']
 
   print(temp_pref)
@@ -35,14 +35,14 @@ def queryendpoint():
     
   print(iced_filter, hot_filter)
   if (not iced_filter and not hot_filter):
-    ranked = jaccard(query, tokenized_df, [i for i in range(len(tokenized_df))], sim_feature_weights, treebank_tokenizer) # [score_drink0, score_drink1,]
+    ranked = jaccard(query, tokenized_df.copy(), sim_feature_weights, [i for i in range(n_cocktails)],  treebank_tokenizer) # [score_drink0, score_drink1,]
   else:
-    ranked = icedHot(query, tokenized_df, iced_filter, hot_filter) # [score_drink0, score_drink1,]
+    ranked = icedHot(query, sm_df, iced_filter, hot_filter) # [score_drink0, score_drink1,]
   top_cocktails = top_scores(ranked) # [{name:"", ingredients:"[]", description:"",..},]
-  """
+  
 
-  jaccard_sim = jaccard(query, tokenized_df.copy(), sim_feature_weights, treebank_tokenizer)
-  top_cocktails = top_scores(jaccard_sim) 
+  # jaccard_sim = jaccard(query, tokenized_df.copy(), sim_feature_weights,[i for i in range(n_cocktails)], treebank_tokenizer)
+  # top_cocktails = top_scores(jaccard_sim) 
 
   return {
     'query_string': query,
