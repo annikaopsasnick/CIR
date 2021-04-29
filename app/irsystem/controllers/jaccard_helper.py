@@ -5,6 +5,9 @@ import nltk
 import re
 from nltk.tokenize import TreebankWordTokenizer
 from nltk.corpus import stopwords
+from autocorrect import Speller
+
+spell = Speller(lang='en')
 
 # download stop words 
 nltk.download('stopwords')
@@ -43,11 +46,13 @@ def clean_data(raw_df):
         tokenized_df[feature] = sm_df
     return tokenized_df
 
- # tokenize, lowercase, and remove punctuation from input_query 
+ # tokenize, lowercase, and remove punctuation, autocorrect from input_query 
 def clean_query(input_query, tokenizer):
     input_query = str(input_query)
     tok_list = tokenizer.tokenize(input_query)
-    return [q.lower() for q in tok_list if q.isalpha()]
+    autocorrect_toks = [spell(q.lower()) for q in tok_list if q.isalpha()]
+    print(autocorrect_toks)
+    return autocorrect_toks
     
 
 # global variables accessible to jaccard.py
