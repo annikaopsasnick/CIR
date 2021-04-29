@@ -34,7 +34,7 @@ def clean_data(raw_df):
     Params: {raw_df: Pandas df}
     Returns: Pandas df
     """
-    
+
     tokenized_df = pd.DataFrame()
     for feature in sim_feature_weights.keys():
         sentances = raw_df[feature].map(str)
@@ -59,7 +59,19 @@ def clean_query(input_query, tokenizer):
 
 # global variables accessible to jaccard.py
 # input_df = df
+"""
+tokenized_df = pd.DataFrame()
+tok_df_path = os.path.join(os.path.dirname(__file__), "tokenized_dataset.csv")
+if (os.path.exists(tok_df_path)):
+    tokenized_df = pd.read_csv(tok_df_path)
+else:
+    tokenized_df = clean_data(df)
+    tokenized_df.to_csv("app/irsystem/controllers/tokenized_dataset.csv", index=False)
+"""
 tokenized_df = clean_data(df)
+
+print(tokenized_df)
+
 n_cocktails, n_cols = tokenized_df.shape
 sm_df = tokenized_df.copy()
 sm_df['combined'] = sm_df['base_spirits']+ sm_df['name'] + sm_df['description'] + sm_df['ingredients']
