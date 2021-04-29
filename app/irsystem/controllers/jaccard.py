@@ -37,7 +37,7 @@ def jaccard(input_query, input_df, weights, indexes, tokenizer=treebank_tokenize
     """
     # TODO: make compatible with indexes 
     input_df = input_df.iloc[indexes, :]
-    print(input_df)
+    print("inside jaccard\n",input_df)
     query = clean_query(input_query, tokenizer)
 
 #     display(input_df)
@@ -82,7 +82,7 @@ def top_scores(jac_sim):
     Params: {jac_sim: Pandas Series}
     Returns: List of json objects
     """
-      
+    print("inside top scores", jac_sim)
     jaccard_sorted = jac_sim.sort_values(ascending=False) # sort in descending order 
     top_10 = jaccard_sorted.head(10)  # get the top 10 indices and scores
     top_10 = top_10[top_10!=0]    # remove zero scores
