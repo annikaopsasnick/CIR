@@ -2,6 +2,7 @@ from . import *
 from app.irsystem.models.helpers import *
 from app.irsystem.models.helpers import NumpyEncoder as NumpyEncoder
 from app.irsystem.controllers.jaccard import *
+from app.irsystem.controllers.filters import *
 
 project_name = "Liver Let Die - Personalized Cocktail Recommendations"
 net_id = "Annika Opsasnick (aro42), Callie Aboaf (cha46), Kaysie Yu (ky276), Simran Puri (sp2262), Yunyun Wang (yw458)"
@@ -20,11 +21,10 @@ def queryendpoint():
   print("here on backend",inputs)
 	
   query = inputs['query_string']
-
- 
   temp_pref = inputs['temp']
+  spirit = inputs['base_spirit']
 
-  print(temp_pref)
+  print(temp_pref, spirit)
 
   iced_filter = False
   hot_filter = False
@@ -32,13 +32,15 @@ def queryendpoint():
     iced_filter = True
   if temp_pref == "hot":
     hot_filter = True
+
     
   print(iced_filter, hot_filter)
-  if (not iced_filter and not hot_filter):
+  if (not iced_filter and not hot_filter and not spirit):
     ranked = jaccard(query, tokenized_df.copy(), sim_feature_weights, [i for i in range(n_cocktails)],  treebank_tokenizer) # [score_drink0, score_drink1,]
   else:
-    ranked = icedHot(query, sm_df, iced_filter, hot_filter) # [score_drink0, score_drink1,]
+    ranked = filters(query, sm_df, iced_filter, hot_filter, spirit) # [score_drink0, score_drink1,]
   top_cocktails = top_scores(ranked) # [{name:"", ingredients:"[]", description:"",..},]
+  print(cocktail['name'] for cocktail in top_cocktails)
   
 
   # jaccard_sim = jaccard(query, tokenized_df.copy(), sim_feature_weights,[i for i in range(n_cocktails)], treebank_tokenizer)

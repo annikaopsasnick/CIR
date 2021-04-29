@@ -31,19 +31,9 @@ const Form = ({inputs, setInputs, handleSubmit}) => {
         </div>
 
         <div class = "input-pair">
-
-          <label>
-            Key Word: 
-            
-          </label>
-          <input type = "text" id="key-words" name= "key_word" onChange={handleChange} />
-        </div>
-
-        <div class = "input-pair">
           <label>
             Base Spirit: 
           </label>
-
           <select id="base_spirit" name="base_spirit" onChange={handleChange}>
             <option value= {inputs.base_spirit} >--Please choose a base spirit--</option>
             <option value="vodka">Vodka</option>
@@ -52,6 +42,8 @@ const Form = ({inputs, setInputs, handleSubmit}) => {
             <option value ="rum">Rum</option>
             <option value ="whiskey">Whiskey</option>
             <option value ="brandy">Brandy</option>
+            <option value ="liqueur">Liqueur</option>
+            <option value ="wine">Wine</option>
           </select>
         </div>
 
@@ -68,6 +60,7 @@ const Form = ({inputs, setInputs, handleSubmit}) => {
             <option value="nopref" selected="selected">No Preference</option>
           </select>
         </div>
+
         <button type="submit" value="Submit">Submit</button>
       </form>
     );
