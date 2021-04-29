@@ -93,5 +93,7 @@ def filters(query, sm_df, iced, hot, spirit):
   else:
     indexes_include = [i for i in range(len(sm_df))]
 
-
-  return jaccard(query, tokenized_df.copy(),sim_feature_weights, indexes_include)
+  if query:
+    return jaccard(query, tokenized_df.copy(),sim_feature_weights, indexes_include)
+  else:
+    # pass: return column for ratings to get top 10
