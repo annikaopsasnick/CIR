@@ -35,7 +35,7 @@ const Form = ({inputs, setInputs, handleSubmit}) => {
             Base Spirit: 
           </label>
           <select id="base_spirit" name="base_spirit" onChange={handleChange}>
-            <option value= {inputs.base_spirit} >--Please choose a base spirit--</option>
+            <option value="nopref" selected="selected">No Preference</option>
             <option value="vodka">Vodka</option>
             <option value ="tequila">Tequila</option>
             <option value ="gin">Gin</option>

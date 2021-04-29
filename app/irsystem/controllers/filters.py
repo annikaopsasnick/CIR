@@ -23,14 +23,14 @@ def containsWords(row, words):
 # terms for filters
 iced_terms = ['iced', 'ice', 'chilled', 'frozen', 'summer']
 hot_terms = ['hot', 'heated', 'warm']
-def icedHot(query, inputs, iced, hot):
+def icedHot(inputs, iced, hot):
     indexes_include = []
 
     for idx,drink in enumerate(inputs):
       include = False
       if iced == True:
         if containsWords(inputs[idx], iced_terms) and not containsWords(inputs[idx], hot_terms):
-         include = True
+          include = True
       elif hot == True:
         if containsWords(inputs[idx], hot_terms) and not containsWords(inputs[idx], iced_terms):
           include = True
@@ -38,8 +38,7 @@ def icedHot(query, inputs, iced, hot):
       if include == True:
         indexes_include.append(idx)
     
-    print(indexes_include)
-    return jaccard(query, tokenized_df.copy(),sim_feature_weights, indexes_include,)
+    return indexes_include
 
 def ingredientBoolean(inputs, contains, excludes):
     indexes_include = []
@@ -71,14 +70,28 @@ def base_spirit(spirit, df=df):
     indexes_include = []
     
     for idx in range(len(df)):
-      if spirit in df.loc[idx, ['base_spirits']][0]:
-        indexes_include.append(idx)
-    
+        if spirit in df.loc[idx, ['base_spirits']][0]:
+          indexes_include.append(idx)
     return indexes_include
     
 def filters(query, sm_df, iced, hot, spirit):
-  indexes_spirit = base_spirit(spirit)
-  indexes_temp = icedHot(query, sm_df, iced, hot)
-  indexes_include = [value for value in indexes_spirit if value in indexes_temp]
+  if iced or hot:
+    indexes_temp = icedHot(sm_df, iced, hot)
+  else:
+    indexes_temp = []
+  if spirit:
+    indexes_spirit = base_spirit(spirit)
+  else:
+    indexes_spirit = []
+
+  if len(indexes_temp):
+    indexes_include = indexes_temp
+    if len(indexes_spirit):
+      indexes_include = [value for value in indexes_spirit if value in indexes_temp]
+  elif len(indexes_spirit):
+    indexes_include = indexes_spirit
+  else:
+    indexes_include = [i for i in range(len(sm_df))]
+
 
   return jaccard(query, tokenized_df.copy(),sim_feature_weights, indexes_include)

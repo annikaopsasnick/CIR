@@ -35,7 +35,7 @@ def queryendpoint():
 
     
   print(iced_filter, hot_filter)
-  if (not iced_filter and not hot_filter and not spirit):
+  if (not iced_filter and not hot_filter and spirit == "nopref"):
     ranked = jaccard(query, tokenized_df.copy(), sim_feature_weights, [i for i in range(n_cocktails)],  treebank_tokenizer) # [score_drink0, score_drink1,]
   else:
     ranked = filters(query, sm_df, iced_filter, hot_filter, spirit) # [score_drink0, score_drink1,]
