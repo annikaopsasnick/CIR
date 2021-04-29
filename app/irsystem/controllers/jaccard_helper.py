@@ -59,16 +59,16 @@ def clean_query(input_query, tokenizer):
 
 # global variables accessible to jaccard.py
 # input_df = df
-"""
+
 tokenized_df = pd.DataFrame()
-tok_df_path = os.path.join(os.path.dirname(__file__), "tokenized_dataset.csv")
+tok_df_path = os.path.join(os.path.dirname(__file__), "tokenized_dataset.pkl")
 if (os.path.exists(tok_df_path)):
-    tokenized_df = pd.read_csv(tok_df_path)
+    tokenized_df = pd.read_pickle(tok_df_path)
 else:
     tokenized_df = clean_data(df)
-    tokenized_df.to_csv("app/irsystem/controllers/tokenized_dataset.csv", index=False)
-"""
-tokenized_df = clean_data(df)
+    tokenized_df.to_pickle("app/irsystem/controllers/tokenized_dataset.pkl")
+
+
 
 print(tokenized_df)
 
