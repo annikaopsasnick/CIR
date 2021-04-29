@@ -37,14 +37,16 @@ def clean_data(raw_df):
     
     tokenized_df = pd.DataFrame()
     for feature in sim_feature_weights.keys():
-        sm_df = raw_df[feature].map(str)
-       
-        for idx,vector_sen in enumerate(sm_df):
+        sentances = raw_df[feature].map(str)
+        tokens = sentances.copy()
+
+        for idx,vector_sen in enumerate(sentances):
             tokenized_vector = getwords(vector_sen) # removes punctuation and numbers
             #     remove stop words 
-            sm_df[idx] = [w for w in tokenized_vector if not w in stopwords.words('english')]
-        tokenized_df[feature] = sm_df
+            tokens[idx] = [w for w in tokenized_vector if not w in stopwords.words('english')]
+        tokenized_df[feature] = tokens
     return tokenized_df
+
 
  # tokenize, lowercase, and remove punctuation, autocorrect from input_query 
 def clean_query(input_query, tokenizer):
