@@ -91,7 +91,7 @@ def top_scores(jac_sim):
 
     top_10_idx = top_10.index.tolist() # get list of indexes
     top_10_df = df.iloc[top_10_idx, :] # get rows of top "ten" indexes
-    top_10_json = top_10_df.to_json(orient='recgords')
+    top_10_json = top_10_df.to_json(orient='records')
 
     return top_10_json
 
