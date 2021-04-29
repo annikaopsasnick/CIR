@@ -37,7 +37,7 @@ def jaccard(input_query, input_df, weights, indexes, tokenizer=treebank_tokenize
     """
     # TODO: make compatible with indexes 
     input_df = input_df.iloc[indexes, :]
-    print(input_df)
+    # print(input_df)
     query = clean_query(input_query, tokenizer)
 
 #     display(input_df)
@@ -49,28 +49,6 @@ def jaccard(input_query, input_df, weights, indexes, tokenizer=treebank_tokenize
 
 # initalize variables for jaccard function call 
 num_cocktails = df.shape[0]
-
-# terms for filters
-iced_terms = ['iced', 'ice', 'chilled', 'frozen']
-hot_terms = ['hot', 'heated', 'warm']
-def icedHot(query, inputs, iced, hot):
-    indexes_include = []
-
-    for idx,drink in enumerate(inputs):
-        include = False
-        if iced == True:
-            for term in inputs[idx]:
-                if term in iced_terms:
-                    include = True
-        if hot == True:
-            for term in inputs[idx]:
-                if term in hot_terms:
-                    include = True
-        if include == True:
-            indexes_include.append(idx)
-    
-    print(indexes_include)
-    return jaccard(query, tokenized_df.copy(),sim_feature_weights, indexes_include,  tokenizer=treebank_tokenizer)
 
 # initalize variables for jaccard function call 
 num_cocktails = df.shape[0]
@@ -87,11 +65,11 @@ def top_scores(jac_sim):
     top_10 = jaccard_sorted.head(10)  # get the top 10 indices and scores
     top_10 = top_10[top_10!=0]    # remove zero scores
 
-    print(top_10)
+    print("top 10", top_10)
 
     top_10_idx = top_10.index.tolist() # get list of indexes
     top_10_df = df.iloc[top_10_idx, :] # get rows of top "ten" indexes
-    top_10_json = top_10_df.to_json(orient='recgords')
+    top_10_json = top_10_df.to_json(orient='records')
 
     return top_10_json
 
