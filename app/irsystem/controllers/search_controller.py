@@ -46,10 +46,7 @@ def queryendpoint():
 
   # no search terms
   else:
-    # if only filters
-    if not (not iced_filter and not hot_filter and spirit == "nopref"):
-      ranked = filters(query, sm_df, iced_filter, hot_filter, spirit, ) # [score_drink0, score_drink1,]
-    # if no terms
+    ranked = filters(query, sm_df, iced_filter, hot_filter, spirit, ) # [score_drink0, score_drink1,]
 
   top_cocktails = top_scores(ranked) # [{name:"", ingredients:"[]", description:"",..},]
   print(cocktail['name'] for cocktail in top_cocktails)
