@@ -7,10 +7,14 @@ import os
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO
+from config import basedir
 
 # Configure app
 socketio = SocketIO()
-app = Flask(__name__, template_folder="../webapp/build", static_folder="../webapp/build/static")
+templatefolder = basedir+"/webapp/build"
+staticfolder = basedir+"/webapp/build/static"
+
+app = Flask(__name__, template_folder=templatefolder, static_folder=staticfolder)
 app.config.from_object(os.environ["APP_SETTINGS"])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
