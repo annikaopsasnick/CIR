@@ -26,7 +26,7 @@ const Form = ({inputs, setInputs, handleSubmit}) => {
         <div class = "input-pair">
           <label>
             Search:
-            <input type="text" name= "query_string" onChange={handleChange} />
+            <input type="text" name= "query_string" placeholder = "ex> fruity martini" onChange={handleChange} />
           </label>
         </div>
 

@@ -8,9 +8,14 @@ const ListItem = (props) => {
         props.ViewCocktail(props.name) // open specific cocktail details
       }}>
         <h2>{props.name}</h2>
-        <img src={props.image_source} alt="cocktail" />
-        <p>{props.ingredients}</p>
-        <p>{props.rating}</p>
+        <div class="row">
+          <img src={props.image_source} alt="cocktail" />
+          <p>{props.ingredients}</p>
+        </div>
+        <div class = "rating">
+          <h3>Social rating:  </h3>
+          <h3>{props.rating}</h3>
+        </div>
       </button>
     </li>
   )

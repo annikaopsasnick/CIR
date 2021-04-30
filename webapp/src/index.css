@@ -40,7 +40,9 @@ Formating for Left Portion of Page (title and form)
   position: relative;
   padding:3rem;
   display: flex;
-flex-direction: column;
+  flex-direction: column;
+ 
+
 }
 
 .left h1 {
@@ -141,6 +143,15 @@ padding-bottom: 5px;
 ul {
   list-style-type: none;
   padding-inline-start: 0;
+}
+
+.cocktailList .row {
+  display: flex;
+  flex-direction: row;
+}
+.cocktailList .rating {
+  display: flex;
+  flex-direction: row;
 }
 
 /*****************************************************************************
