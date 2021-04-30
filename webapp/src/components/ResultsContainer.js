@@ -7,7 +7,7 @@ import { useState } from 'react';
 const ResultsContainer = ({ cocktails, isList }) => {
 
 
-  var default_cocktail_info = { 'ingredients': "", 'description': "", 'name': "", 'url': "", 'image_source': "", 'rating': 0 }
+  var default_cocktail_info = { 'ingredients': "", 'description': "", 'name': "", 'url': "", 'image_source': "", 'rating': 0, 'num_reviews': 0 }
 
   // store cocktail info based on selection
   const [cocktail, setCocktail] = useState(default_cocktail_info)
@@ -33,7 +33,8 @@ const ResultsContainer = ({ cocktails, isList }) => {
         name={cocktail.name}
         url={cocktail.url}
         image_source={cocktail.image}
-        rating={5}
+        rating={cocktail.rating}
+        num_reviews={cocktail.num_reviews}
         setIsList={setVariant} />
   }
 

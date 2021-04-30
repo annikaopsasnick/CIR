@@ -1,3 +1,4 @@
+
 html {
   background: url(images/bar.jpg) no-repeat center center fixed;
   background-image: linear-gradient(
@@ -21,7 +22,7 @@ code {
   
 }
 img {
-  max-width: 25%;
+  max-width: 50%;
   height: auto
 }
 
@@ -125,8 +126,165 @@ ul {
   padding-inline-start: 0;
 }
 
+/*****************************************************************************
+Formating for Cocktail Recipe View 
+******************************************************************************/
 .Cocktail {
-  background-color: #f3e7f16f;
+  /* background-color: #f3e7f16f; */
+  position: relative;
+  max-height: 650px;
+
 }
+
+.Cocktail button {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  z-index: 2;
+}
+
+.Cocktail h2{
+  /* color: #e4683d !important; */
+  font-family: "Playfair Display",serif!important;
+  font-weight: 400;
+  font-size: 1.875rem;
+  line-height: 1.2;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.2em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+
+}
+
+.Cocktail p {
+  font-family: Verdana, sans-serif;
+}
+
+.Cocktail li{
+  font-family: Verdana, sans-serif;
+}
+
+.Cocktail_title {
+  justify-content: center;
+  height: auto;
+  position: absolute;
+  top: -12px;
+  left: -5px;
+  padding: 7px;
+  z-index: 1;
+  overflow:visible;
+  background-color: #f3e7f1;
+}
+
+.Cocktail_title .Cocktail_name {
+  font-family: "Playfair Display",serif!important;
+  color: #e4683d!important;
+  /* color: #f2fde6; */
+  /* color: black; */
+  font-size: 3rem;
+  font-weight: 700;
+  margin-block-start: 0.03em;
+  margin-block-end: 0.03em;
+  /* border: 5px solid #f2fde6; */
+}
+
+.Cocktail_title .Cocktail_rating {
+  font-family: Roboto, arial, sans-serif;
+  font-size: 14px;
+  color: #70757a;
+}
+
+.Cocktail-layout {
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1 1 100%;
+  display: flex;
+  margin: 2%;
+
+}
+
+.Cocktail-layout .column {
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1 1 100%;
+  display: flex;
+  text-align: left;
+}
+
+.Cocktail-layout .column#Ingredients{
+  flex: 1 1 0;
+  background-color: #f3e7f1ac;
+  font-size:0.8rem;
+}
+
+ .Cocktail-layout .column#Description{
+  flex: 2 1 0;
+  font-size: 0.8rem;
+  max-height: 300px;
+  background-color:#c6d4ce;
+  overflow-y: scroll;
+  /* background-color:#f2fde6;  */
+ }
+  
+
+
+
+.Cocktail-layout .col-item {
+  flex: 30 0 50%;
+  max-width: 100%;
+  display: flex;
+  color: #111111;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden
+}
+
+.Cocktail_image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
+}
+
+.image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+img.Cocktail_image {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  height: 350px;
+}
+
+.Cocktail-layout .row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-height: 100%;
+  max-width: 100%;
+  flex: 1 1 100%;
+  display: flex;
+  color: #111111;
+}
+
+.Cocktail-layout .row-item {
+  /* text-align: center; */
+  /* flex: 0 0 50%; */
+  padding: 2%;
+  max-width: 50%;
+  background-color: transparent !important;
+  /* opacity: 1; */
+  /* position: relative; */
+  /* display: flex; */
+}
+
+/*****************************************************************************
+End formatting for Cocktail Recipe View 
+******************************************************************************/
+
+
 
 
