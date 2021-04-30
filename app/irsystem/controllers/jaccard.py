@@ -35,7 +35,6 @@ def jaccard(input_query, input_df, weights, indexes, tokenizer=treebank_tokenize
              tokenizer: a TreebankWordTokenizer}
     Returns: np.ndarray
     """
-    # TODO: make compatible with indexes 
     input_df = input_df.iloc[indexes, :]
     print("inside jaccard\n",input_df)
     query = clean_query(input_query, tokenizer)
