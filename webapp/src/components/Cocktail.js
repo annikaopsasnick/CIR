@@ -2,8 +2,9 @@
 import PropTypes from 'prop-types';
 // @ts-ignore
 import StarRatings from 'react-star-ratings';
-import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { faWindowClose, faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const Cocktail = (props) => {
 
@@ -22,7 +23,13 @@ const Cocktail = (props) => {
 
       <button onClick={() => props.setIsList(true)} //close back to list view
         type="button">
-        <FontAwesomeIcon icon={faWindowClose} size={'2x'} />
+        <span className="fa-layers fa-fw">
+          <FontAwesomeIcon icon={faTimesCircle} size={'2x'}
+            transform="down-1 left-1" />
+          <FontAwesomeIcon icon={faTimesCircle} size={'2x'} color="rgb(242, 253, 230)" />
+        </span>
+
+
       </button>
 
       <div className="Cocktail-layout">
@@ -58,14 +65,14 @@ const Cocktail = (props) => {
           <div className="col-item">
             <div className="row">
 
-              <div className="column" id="Ingredients">
+              <div className="text-box" id="Ingredients">
                 <h2 className="Cocktail_sub_title">Ingredients</h2>
                 <ul className="Cocktail_ingredients">
                   {ingredients}
                 </ul>
               </div>
 
-              <div className="column" id="Description">
+              <div className="text-box" id="Description">
                 <h2 className="Cocktail_sub_title">Description</h2>
                 <p>{props.description}</p>
                 <a href={props.url} target="_blank">go to recipe</a>
