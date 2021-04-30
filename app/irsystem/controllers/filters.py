@@ -73,8 +73,17 @@ def base_spirit(spirit, df=df):
         if spirit in df.loc[idx, ['base_spirits']][0]:
           indexes_include.append(idx)
     return indexes_include
+
+
+def season_filter(season, df=df):
+    indexes_include = []
     
-def filters(query, sm_df, iced, hot, spirit):
+    for idx in range(len(df)):
+        if season == df.loc[idx, ['season']][0]:
+          indexes_include.append(idx)
+    return indexes_include
+    
+def filters(query, sm_df, iced, hot, spirit, season):
   if iced or hot:
     indexes_temp = icedHot(sm_df, iced, hot)
   else:
@@ -83,15 +92,46 @@ def filters(query, sm_df, iced, hot, spirit):
     indexes_spirit = base_spirit(spirit)
   else:
     indexes_spirit = []
+  if season:
+    indexes_season = season_filter(season)
+  else:
+    indexes_season = []
+
+
+  set_temp = set(indexes_temp)
+  set_spirit = set(indexes_spirit)
+  set_season = set(indexes_season)
 
   if len(indexes_temp):
-    indexes_include = indexes_temp
+    indexes_include = set_temp
     if len(indexes_spirit):
-      indexes_include = [value for value in indexes_spirit if value in indexes_temp]
+      indexes_include = indexes_include.intersection(set_spirit)
+      if len(indexes_season):
+        indexes_include = indexes_include.instersection(set_season)
+    elif len(indexes_season):
+      indexes_include = indexes_include.instersection(set_season)
+
+  elif len(indexes_season):
+    indexes_include = set_season
+    if len(indexes_spirit):
+      indexes_include = indexes_include.intersection(set_spirit)
+      if len(indexes_temp):
+        indexes_include = indexes_include.instersection(set_temp)
+    elif len(indexes_temp):
+      indexes_include = indexes_include.instersection(set_temp)
+
   elif len(indexes_spirit):
     indexes_include = indexes_spirit
+    if len(indexes_temp):
+      indexes_include = indexes_include.intersection(set_temp)
+      if len(indexes_season):
+        indexes_include = indexes_include.instersection(set_season)
+    elif len(indexes_season):
+      indexes_include = indexes_include.instersection(set_season)
   else:
     indexes_include = [i for i in range(len(sm_df))]
+
+  indexes_include = list(indexes_include)
 
   if query:
     return jaccard(query, tokenized_df.copy(),sim_feature_weights, indexes_include)

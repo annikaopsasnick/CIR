@@ -8,7 +8,7 @@ import ResultsContainer from './components/ResultsContainer.js';
 
 function App() {
 
-  const default_input = { 'temp': 'nopref', 'query_string': '', 'base_spirit': 'nopref', 'ingredients': [] }
+  const default_input = { 'temp': 'nopref', 'query_string': '', 'base_spirit': 'nopref', 'ingredients': [], 'season': 'nopref'}
 
   const [inputs, setInputs] = useState(default_input)
   const [results, updateResults] = useState([])
@@ -16,7 +16,7 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (inputs.query_string === "" & inputs.temp === 'nopref' & inputs.base_spirit === 'nopref') {
+    if (inputs.query_string === "" & inputs.temp === 'nopref' & inputs.base_spirit === 'nopref' & inputs.season === 'nopref') {
       alert("Please enter a search term or filter.");
     }
     axios.post('/query', inputs) // send inputs to backend
