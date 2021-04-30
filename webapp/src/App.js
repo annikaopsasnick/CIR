@@ -16,6 +16,9 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (inputs.query_string === "" & inputs.temp === '' & inputs.base_spirit === '') {
+      alert("Please enter a search term or filter.");
+    }
     axios.post('/query', inputs) // send inputs to backend
       .then((response) => {
         console.log(response); // recieve relevant list of cocktails 
@@ -31,7 +34,7 @@ function App() {
   let result_contents = (results.length != 0 & !initialPage) ?
     < ResultsContainer cocktails={results} isList={true} /> :
     (initialPage) ? <div className="first-render"></div> :
-      <div className="no-results">No cocktails found</div>
+      <div className="no-results">No cocktails found. Try a different search! </div>
 
 
   return (
