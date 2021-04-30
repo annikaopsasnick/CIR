@@ -30,35 +30,45 @@ const Form = ({inputs, setInputs, handleSubmit}) => {
           </label>
         </div>
 
-        <div class = "input-pair">
-          <label>
-            Base Spirit: 
-          </label>
-          <select id="base_spirit" name="base_spirit" onChange={handleChange}>
-            <option value="nopref" selected="selected">No Preference</option>
-            <option value="vodka">Vodka</option>
-            <option value ="tequila">Tequila</option>
-            <option value ="gin">Gin</option>
-            <option value ="rum">Rum</option>
-            <option value ="whiskey">Whiskey</option>
-            <option value ="brandy">Brandy</option>
-            <option value ="liqueur">Liqueur</option>
-            <option value ="wine">Wine</option>
-          </select>
-        </div>
+        <div class = "filter-container">
+          <label>Filters:</label>
+          <div class = "input-pair">
+            <label>
+              Base Spirit: 
+            </label>
+            <select id="base_spirit" name="base_spirit" onChange={handleChange}>
+              <option value="nopref" selected="selected">No Preference</option>
+              <option value="vodka">Vodka</option>
+              <option value ="tequila">Tequila</option>
+              <option value ="gin">Gin</option>
+              <option value ="rum">Rum</option>
+              <option value ="whiskey">Whiskey</option>
+              <option value ="brandy">Brandy</option>
+              <option value ="liqueur">Liqueur</option>
+              <option value ="wine">Wine</option>
+              <option value ="lowalc">Low Alcohol</option>
+            </select>
+          </div>
 
-        {/* <label class="switch">
-          Mocktail?
-          <input id="mock" name="mocktail" type="checkbox" onChange={handleChecked}/>
-          <span class="slider round"></span>
-        </label> */}
-        <div class = "input-pair">
-          <label for="temp">Temperature Preference: </label>
-          <select name="temp" id="temp" onChange={handleChange}>
-            <option value="iced">Iced</option>
-            <option value="hot">Hot</option>
-            <option value="nopref" selected="selected">No Preference</option>
-          </select>
+          <div class = "input-pair">
+            <label for="temp">Temperature: </label>
+            <select name="temp" id="temp" onChange={handleChange}>
+              <option value="iced">Iced</option>
+              <option value="hot">Hot</option>
+              <option value="nopref" selected="selected">No Preference</option>
+            </select>
+          </div>
+
+          <div class = "input-pair">
+            <label for="season">Season: </label>
+            <select name="season" id="season" onChange={handleChange}>
+              <option value="winter">Winter</option>
+              <option value="spring">Spring</option>
+              <option value="summer">Summer</option>
+              <option value="fall">Fall</option>
+              <option value="nopref" selected="selected">No Preference</option>
+            </select>
+          </div>
         </div>
 
         <button type="submit" value="Submit">Submit</button>
