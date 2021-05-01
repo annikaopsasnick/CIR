@@ -4,15 +4,17 @@ import axios from 'axios';
 
 import Form from './components/Form.js';
 import ResultsContainer from './components/ResultsContainer.js';
+import SearchReccomender from './components/SearchReccomender.js';
 
 
 function App() {
 
-  const default_input = { 'temp': 'nopref', 'query_string': '', 'base_spirit': 'nopref', 'ingredients': [], 'season': 'nopref'}
+  const default_input = { 'temp': 'nopref', 'query_string': '', 'base_spirit': 'nopref', 'ingredients': [], 'season': 'nopref' }
 
   const [inputs, setInputs] = useState(default_input)
   const [results, updateResults] = useState([])
   const [initialPage, updateInitialPage] = useState(true)
+  const [search_suggestions, updateSuggestions] = useState({})
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,8 +26,10 @@ function App() {
         console.log(response); // recieve relevant list of cocktails 
         console.log("it works!")
         var cocktail_results = JSON.parse(response.data.cocktails)
+        var suggested_words = response.data.search_suggestions
         updateInitialPage(false)
         updateResults(cocktail_results, () => console.log("results", results))
+        updateSuggestions(suggested_words)
       }, (error) => {
         console.log(error);
       });
@@ -34,7 +38,11 @@ function App() {
   let result_contents = (results.length != 0 & !initialPage) ?
     < ResultsContainer cocktails={results} isList={true} /> :
     (initialPage) ? <div className="first-render"></div> :
-      <div className="no-results">No cocktails found. Try a different search! </div>
+      <div className="no-results">No cocktails found. Try a different search!
+        <SearchReccomender
+          suggestions={search_suggestions}
+        />
+      </div>
 
 
   return (
