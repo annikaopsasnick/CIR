@@ -107,18 +107,18 @@ def filters(query, sm_df, iced, hot, spirit, season):
     if len(indexes_spirit):
       indexes_include = indexes_include.intersection(set_spirit)
       if len(indexes_season):
-        indexes_include = indexes_include.instersection(set_season)
+        indexes_include = indexes_include.intersection(set_season)
     elif len(indexes_season):
-      indexes_include = indexes_include.instersection(set_season)
+      indexes_include = indexes_include.intersection(set_season)
 
   elif len(indexes_season):
     indexes_include = set_season
     if len(indexes_spirit):
       indexes_include = indexes_include.intersection(set_spirit)
       if len(indexes_temp):
-        indexes_include = indexes_include.instersection(set_temp)
+        indexes_include = indexes_include.intersection(set_temp)
     elif len(indexes_temp):
-      indexes_include = indexes_include.instersection(set_temp)
+      indexes_include = indexes_include.intersection(set_temp)
 
   elif len(indexes_spirit):
     indexes_include = indexes_spirit
