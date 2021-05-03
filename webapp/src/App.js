@@ -54,6 +54,8 @@ function App() {
 
           <div className="left">
             <h1 id="title">What is your cocktail order?</h1>
+            <h3 id="subtitle">Annika Opsasnick (aro42) Callie Aboaf (cha46) Yunyun Wang (yw458) 
+            Simran Puri (sp2262) Kaysie Yu (ky276)</h3>
             <div className="form-container">
               < Form
                 inputs={inputs}

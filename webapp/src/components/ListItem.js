@@ -2,6 +2,12 @@ import PropTypes from 'prop-types';
 
 
 const ListItem = (props) => {
+  //pre-processing and data cleaning 
+  var ingredient_list = props.ingredients.replace(/[\[\]']+/g, '').split(",")
+
+  //list item view of ingredients 
+  const ingredient_items = ingredient_list.map((ingredient, i) => <li key = {i}>{ingredient}</li>);
+
   return (
     <li>
       <button onClick={() => {
@@ -13,12 +19,16 @@ const ListItem = (props) => {
           </div>
         
             <div className="row">
-              <div className="text-box" id="cocktail-image">
-                <img src={props.image_source} alt="cocktail" />
+              <div className="image-container" id="cocktail-image">
+                <img className = "List_image" src={props.image_source} alt="cocktail" />
               </div>
-              
+
               <div className="text-box" id="ingredients">
-                <p>{props.ingredients}</p>
+              <h2>Ingredients</h2>
+                <ul className = "ListItem_ingredients">
+                  {ingredient_items}
+
+                </ul>
               </div>
 
             </div>
