@@ -95,6 +95,10 @@ Formating for Left Portion of Page (title and form)
   padding: 10px;
 }
 
+.bottom-left p {
+  color:white!important;
+
+}
 /*****************************************************************************
 Formating for Right Portion of Page Results
 ******************************************************************************/
@@ -200,7 +204,7 @@ Formating for Cocktail List View
 
 .ListItem {
   background-color: #f3e7f1;
-  width: 735px;
+  width: 680px;
 }
 
 /* list item name */

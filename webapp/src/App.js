@@ -75,6 +75,9 @@ function App() {
 
           </div>
         </section>
+        <div className = "bottom-left">
+          <p>insert citation url</p>
+        </div>
       </body>
     </div>
 
