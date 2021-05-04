@@ -4,6 +4,7 @@ from app.irsystem.models.helpers import NumpyEncoder as NumpyEncoder
 from app.irsystem.controllers.jaccard import *
 from app.irsystem.controllers.filters import *
 from app.irsystem.controllers.jaccard_helper import custom_dict, compute_edit_distance, clean_query
+import json
 
 project_name = "Liver Let Die - Personalized Cocktail Recommendations"
 net_id = "Annika Opsasnick (aro42), Callie Aboaf (cha46), Kaysie Yu (ky276), Simran Puri (sp2262), Yunyun Wang (yw458)"
@@ -51,7 +52,36 @@ def queryendpoint():
     ranked = filters(query, sm_df, iced_filter, hot_filter, spirit, season, ) # [score_drink0, score_drink1,]
 
   top_cocktails = top_scores(ranked) # [{name:"", ingredients:"[]", description:"",..},]
-  print(cocktail['name'] for cocktail in top_cocktails)
+  
+
+  top_json = json.loads(top_cocktails)
+
+  print(top_json)
+  # for cocktail in top_cocktails:
+  #   print(cocktail)
+
+ 
+  # print(top_cocktails)
+
+  #print(cocktail['name'] for cocktail in top_cocktails)
+
+
+  #conditional statements for form inputs 
+  # if (some_param == "social-ratings"):
+  
+  top_10 = sorted(top_json, key = lambda x: x['rating'], reverse = True) #sort by social rating field 
+
+    # else: 
+    #     print("top 10", top_10)
+  print("ratings")
+  print([cocktail['rating'] for cocktail in top_10])
+  print(top_10)
+  
+  #return back to string 
+  # top_cocktails = json.stringify(top_10)
+
+  
+  # print(cocktail['rating'] for cocktail in top_cocktail)
 
   # if no cocktails match search find suggested terms
   search_suggestions = {}
