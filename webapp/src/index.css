@@ -50,7 +50,7 @@ Formating for Left Portion of Page (title and form)
   word-wrap: break-word;
   font-family: "Playfair Display",serif!important;
   text-align: left;
-  font-size: 4.5rem;
+  font-size: 4.0rem;
   font-weight: 700;
 }
 
@@ -63,7 +63,6 @@ Formating for Left Portion of Page (title and form)
   font-weight: 200;
 
 }
-
 
 .container {
   display: flex;
@@ -98,6 +97,18 @@ Formating for Left Portion of Page (title and form)
 .bottom-left p {
   color:white!important;
 
+}
+
+.left .footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding-left: 15px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: left;
+  font-size: 12px;
 }
 /*****************************************************************************
 Formating for Right Portion of Page Results
@@ -204,7 +215,7 @@ Formating for Cocktail List View
 
 .ListItem {
   background-color: #f3e7f1;
-  width: 680px;
+  width: 650px;
 }
 
 /* list item name */
