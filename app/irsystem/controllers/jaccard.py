@@ -61,8 +61,16 @@ def top_scores(jac_sim):
     """
     print("inside top scores", jac_sim)
     jaccard_sorted = jac_sim.sort_values(ascending=False) # sort in descending order 
+
     top_10 = jaccard_sorted.head(10)  # get the top 10 indices and scores
     top_10 = top_10[top_10!=0]    # remove zero scores
+
+    #conditional statements for form inputs 
+    # if (some_param == "social-ratings"):
+    #     top_10 = top_10.sort_values(ascending=False) #sort by social rating field 
+
+    # else: 
+    #     print("top 10", top_10)
 
     print("top 10", top_10)
 
