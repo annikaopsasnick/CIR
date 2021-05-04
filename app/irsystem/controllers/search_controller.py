@@ -3,6 +3,7 @@ from app.irsystem.models.helpers import *
 from app.irsystem.models.helpers import NumpyEncoder as NumpyEncoder
 from app.irsystem.controllers.jaccard import *
 from app.irsystem.controllers.filters import *
+from app.irsystem.controllers.jaccard_helper import custom_dict, compute_edit_distance, clean_query
 
 project_name = "Liver Let Die - Personalized Cocktail Recommendations"
 net_id = "Annika Opsasnick (aro42), Callie Aboaf (cha46), Kaysie Yu (ky276), Simran Puri (sp2262), Yunyun Wang (yw458)"
@@ -23,8 +24,9 @@ def queryendpoint():
   query = inputs['query_string']
   temp_pref = inputs['temp']
   spirit = inputs['base_spirit']
+  season = inputs['season']
 
-  print(temp_pref, spirit)
+  print("filters:", temp_pref, spirit, season)
 
   iced_filter = False
   hot_filter = False
@@ -38,18 +40,28 @@ def queryendpoint():
   # if search terms
   if (len(query)):
     # if only search terms
-    if (not iced_filter and not hot_filter and spirit == "nopref"):
+    if (not iced_filter and not hot_filter and spirit == "nopref" and season == "nopref"):
       ranked = jaccard(query, tokenized_df.copy(), sim_feature_weights, [i for i in range(n_cocktails)],  treebank_tokenizer) # [score_drink0, score_drink1,]
     # if both search terms and filters
     else:
-      ranked = filters(query, sm_df, iced_filter, hot_filter, spirit, )
+      ranked = filters(query, sm_df, iced_filter, hot_filter, spirit, season, )
 
   # no search terms
   else:
-    ranked = filters(query, sm_df, iced_filter, hot_filter, spirit, ) # [score_drink0, score_drink1,]
+    ranked = filters(query, sm_df, iced_filter, hot_filter, spirit, season, ) # [score_drink0, score_drink1,]
 
   top_cocktails = top_scores(ranked) # [{name:"", ingredients:"[]", description:"",..},]
   print(cocktail['name'] for cocktail in top_cocktails)
+
+  # if no cocktails match search find suggested terms
+  search_suggestions = {}
+ 
+  if (len(query) > 0 and (top_cocktails=="[]")):
+    print("here at search suggestions")
+    query_tokens = clean_query(query, treebank_tokenizer)
+    search_suggestions = compute_edit_distance(custom_dict, query_tokens)
+    print(search_suggestions)
+
   
 
   # jaccard_sim = jaccard(query, tokenized_df.copy(), sim_feature_weights,[i for i in range(n_cocktails)], treebank_tokenizer)
@@ -57,7 +69,8 @@ def queryendpoint():
 
   return {
     'query_string': query,
-    'cocktails': top_cocktails
+    'cocktails': top_cocktails,
+    'search_suggestions': search_suggestions,
   }
 
 

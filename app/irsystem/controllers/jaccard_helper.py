@@ -6,8 +6,10 @@ import re
 from nltk.tokenize import TreebankWordTokenizer
 from nltk.corpus import stopwords
 from autocorrect import Speller
+from nltk.metrics.distance import edit_distance 
+import math
 
-spell = Speller(lang='en')
+# spell = Speller(lang='en')
 
 # download stop words 
 nltk.download('stopwords')
@@ -47,14 +49,34 @@ def clean_data(raw_df):
         tokenized_df[feature] = tokens
     return tokenized_df
 
+def compute_edit_distance(custom_dict,query_tokens,suggestion_ed_threshold=10):
 
- # tokenize, lowercase, and remove punctuation, autocorrect from input_query 
+    suggestions = [] # (query token, suggested word, edit distance)
+    for word in query_tokens:
+        min_ed = (math.inf, '')
+
+        for x in custom_dict:
+            ed = edit_distance(word,x)
+            min_ed = (ed,x) if (ed < min_ed[0]) else min_ed
+            if (min_ed[0] == 0):
+                break   
+
+        if (0 < min_ed[0] and min_ed[0] < suggestion_ed_threshold ):
+            suggestions.append((word,min_ed[1],min_ed[0]))
+
+    if (len(suggestions) == 0):
+        return {}
+    else:
+        return {query_word:suggested_word for query_word, suggested_word, ed in suggestions} 
+
+
+ # tokenize, lowercase, and remove punctuation, (autocorrect) from input_query 
 def clean_query(input_query, tokenizer):
     input_query = str(input_query)
     tok_list = tokenizer.tokenize(input_query)
-    autocorrect_toks = [spell(q.lower()) for q in tok_list if q.isalpha()]
-    print(autocorrect_toks)
-    return autocorrect_toks
+    query_toks = [q.lower() for q in tok_list if q.isalpha() and not q in stopwords.words('english')]
+    print(query_toks)
+    return query_toks
     
 
 # global variables accessible to jaccard.py
@@ -69,13 +91,19 @@ else:
     tokenized_df.to_pickle("app/irsystem/controllers/tokenized_dataset.pkl")
 
 
-
 print(tokenized_df)
 
 n_cocktails, n_cols = tokenized_df.shape
 sm_df = tokenized_df.copy()
 sm_df['combined'] = sm_df['base_spirits']+ sm_df['name'] + sm_df['description'] + sm_df['ingredients']
 sm_df = sm_df['combined']
+
+# create a dictionary of search terms from dataset, to be used for suggestions
+custom_dict = sm_df.apply(pd.Series).stack().unique()
+
+
+# pd.DataFrame(custom_dict).to_csv("app/irsystem/controllers/custom_dict.csv")
+
 
 
 
