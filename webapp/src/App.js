@@ -9,7 +9,7 @@ import SearchReccomender from './components/SearchReccomender.js';
 
 function App() {
 
-  const default_input = { 'temp': 'nopref', 'query_string': '', 'base_spirit': 'nopref', 'ingredients': [], 'season': 'nopref', 'easy': '', 'tagsNo': [], 'tagsYes': [], 'sortby': 'nopref' }
+  const default_input = { 'temp': 'nopref', 'query_string': '', 'base_spirit': 'nopref', 'ingredients': [], 'season': 'nopref', 'easy': '', 'tagsNo': [], 'tagsYes': [], 'sortby': 'best_results' }
 
   const [inputs, setInputs] = useState(default_input)
   const [results, updateResults] = useState([])

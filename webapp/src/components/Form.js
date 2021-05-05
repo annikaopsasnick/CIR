@@ -102,16 +102,15 @@ const Form = ({ inputs, setInputs, handleSubmit }) => {
           {/* Right column */}
           <div class="right-filter-col">
             <div class="input-pair">
-              <label for="sortby">Sort Reviews By</label>
+              <label for="sortby">Sort Results By</label>
               <select name="sortby" id="sortby" onChange={handleChange}>
-                <option value="nopref" selected="selected">No Preference</option>
-                <option value="best_results">Best Results</option>
+                <option value="best_results" selected="selected">Best Results</option>
                 <option value="rating">Star Ratings</option>
               </select>
             </div>
 
             <div class="input-pair">
-              <label for="tagsNo">Exclude All</label>
+              <label for="tagsNo">Exclude Ingredients</label>
               <Tags name="tagsNo" handleChangedTags={handleChangedTags} handleDeleteTags={handleDeleteTags}></Tags>
             </div>
 
