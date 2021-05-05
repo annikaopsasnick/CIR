@@ -9,7 +9,7 @@ import SearchReccomender from './components/SearchReccomender.js';
 
 function App() {
 
-  const default_input = { 'temp': 'nopref', 'query_string': '', 'base_spirit': 'nopref', 'ingredients': [], 'season': 'nopref', 'easy': '', 'tagsNo': [], 'tagsYes': [], 'sortby': 'nopref'}
+  const default_input = { 'temp': 'nopref', 'query_string': '', 'base_spirit': 'nopref', 'ingredients': [], 'season': 'nopref', 'easy': '', 'tagsNo': [], 'tagsYes': [], 'sortby': 'nopref' }
 
   const [inputs, setInputs] = useState(default_input)
   const [results, updateResults] = useState([])
@@ -18,8 +18,8 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (inputs.query_string === "" & inputs.temp === 'nopref' & inputs.base_spirit === 'nopref' & inputs.season === 'nopref' & inputs.tagsNo === [] & inputs.tagsYes === [] && inputs.easy == '') {
-      alert("Please enter a search term or filter.");
+    if (inputs.query_string === "" & inputs.temp === 'nopref' & inputs.base_spirit === 'nopref' & inputs.season === 'nopref' & inputs.tagsNo.length === 0 & inputs.tagsYes.length === 0 && inputs.easy == '') {
+      alert("Please enter a search term or filter. Here are some top-rated cocktails!");
     }
     axios.post('/query', inputs) // send inputs to backend
       .then((response) => {
@@ -53,7 +53,7 @@ function App() {
 
           <div className="left">
             <h1 id="title">What is your cocktail order?</h1>
-            <h3 id="subtitle">Annika Opsasnick (aro42) Callie Aboaf (cha46) Yunyun Wang (yw458) 
+            <h3 id="subtitle">Annika Opsasnick (aro42) Callie Aboaf (cha46) Yunyun Wang (yw458)
             Simran Puri (sp2262) Kaysie Yu (ky276)</h3>
             <div className="form-container">
               < Form
@@ -81,7 +81,7 @@ function App() {
         {/* <div className = "bottom-left">
           <p>insert citation url</p>
         </div> */}
-        </body>
+      </body>
 
     </div>
 

@@ -98,7 +98,7 @@ const Form = ({ inputs, setInputs, handleSubmit }) => {
 
 
         <div class="input-pair">
-          <label for="season">Season</label>
+          <label for="season">Season: </label>
           <select name="season" id="season" onChange={handleChange}>
             <option value="nopref" selected="selected">No Preference</option>
             <option value="winter">Winter</option>
