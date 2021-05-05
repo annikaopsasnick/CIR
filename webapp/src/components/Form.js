@@ -110,7 +110,7 @@ const Form = ({ inputs, setInputs, handleSubmit }) => {
         <div class = "input-pair">
           <label for="sortby">Sort By: </label>
           <select name = "sortby" id = "sortby" onChange={handleChange}>
-            <option value = "rating"> Rating</option>
+            <option value = "rating"> Star Rating</option>
             <option value = "best_results">Best Results</option>
             <option value="nopref" selected="selected">No Preference</option>
           </select>
