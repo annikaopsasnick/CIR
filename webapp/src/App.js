@@ -18,7 +18,7 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (inputs.query_string === "" & inputs.temp === 'nopref' & inputs.base_spirit === 'nopref' & inputs.season === 'nopref' & inputs.tagsNo === [] & inputs.tagsYes === [] && inputs.easy == '') {
+    if (inputs.query_string === "" & inputs.temp === 'nopref' & inputs.base_spirit === 'nopref' & inputs.season === 'nopref' & inputs.tagsNo.length === 0 & inputs.tagsYes.length === 0 && inputs.easy == '') {
       alert("Please enter a search term or filter.");
     }
     axios.post('/query', inputs) // send inputs to backend
