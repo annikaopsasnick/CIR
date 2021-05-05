@@ -55,7 +55,7 @@ const Form = ({ inputs, setInputs, handleSubmit }) => {
       <div class="filter-container">
         <p>Advanced Search</p>
         <div class="input-pair">
-          <label>Base Spirit</label>
+          <label>Base Spirit: </label>
           <select id="base_spirit" name="base_spirit" onChange={handleChange}>
             <option value="nopref" selected="selected">No Preference</option>
             <option value="vodka">Vodka</option>
@@ -82,7 +82,7 @@ const Form = ({ inputs, setInputs, handleSubmit }) => {
 
 
         <div class="input-pair">
-          <label for="easy">5 or Less Ingredients</label>
+          <label for="easy">5 or Less Ingredients: </label>
           <input type="checkbox" name="easy" id="easy" onChange={handleChecked}></input>
         </div>
         <br></br>
