@@ -68,13 +68,15 @@ def icedHot(indexes, inputs, iced, hot):
 
 # }
 def base_spirit(indexes, spirit, df=df):
-    indexes_include = []
-    
-    for idx in range(len(df)):
-      if idx in indexes:
-        if spirit in df.loc[idx, ['base_spirits']][0]:
+  indexes_include = []
+  for idx in range(len(df)):
+    if idx in indexes:
+      if spirit in df.loc[idx, ['base_spirits']][0]:
+        indexes_include.append(idx)
+      elif spirit == 'lowalc':
+        if 'Non-Alcoholic' in df.loc[idx, ['categories']][0]:
           indexes_include.append(idx)
-    return indexes_include
+  return indexes_include
 
 
 def season_filter(indexes, season, df=df):
@@ -87,13 +89,12 @@ def season_filter(indexes, season, df=df):
     return indexes_include
 
 def easy_filter(indexes, df=df):
-    indexes_include = []
-    
-    for idx in range(len(df)):
-      if idx in indexes:
-        if df.loc[idx, ['ingredients']][0].count(',') <= 4:
-          indexes_include.append(idx)
-    return indexes_include
+  indexes_include = []
+  for idx in range(len(df)):
+    if idx in indexes:
+      if len(str(df.loc[idx, ['ingredients']][0]).split(',')[1]) <= 4:
+        indexes_include.append(idx)
+  return indexes_include
 
 def tagNo_filter(indexes, inputs, tags, df=df):
     indexes_include = []
@@ -141,8 +142,8 @@ def filters(query, sm_df, iced, hot, spirit, season, easy, tagsNo, tagsYes):
     indexes_include = base_spirit(indexes_include, spirit)
   if season != 'nopref':
     indexes_include = season_filter(indexes_include, season)
-  if easy:
-    indexes_include = easy_filter(indexes_include)
+  # if easy:
+  #   indexes_include = easy_filter(indexes_include)
   if len(tagsNo):
     indexes_include = tagNo_filter(indexes_include, sm_df, tagsNo)
   if len(tagsYes):
