@@ -92,7 +92,6 @@ def easy_filter(indexes, df=df):
     for idx in range(len(df)):
       if idx in indexes:
         if df.loc[idx, ['ingredients']][0].count('/n') <= 5:
-          print("ingr", df.loc[idx, ['ingredients']][0])
           indexes_include.append(idx)
     return indexes_include
 
@@ -133,7 +132,7 @@ def tagYes_filter(indexes, inputs, tags, df=df):
     return indexes_include
     
 def filters(query, sm_df, iced, hot, spirit, season, easy, tagsNo, tagsYes):
-  print(spirit, season, easy)
+  print(spirit, season, easy, tagsNo)
   indexes_include = [i for i in range(len(df))]
   if iced or hot:
     indexes_include = icedHot(indexes_include, sm_df, iced, hot)

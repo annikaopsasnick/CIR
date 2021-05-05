@@ -34,7 +34,6 @@ def queryendpoint():
   tagsNo = inputs['tagsNo']
   tagsYes = inputs['tagsYes']
 
-  print("filters:", temp_pref, spirit, season, easy, tagsNo, tagsYes)
   sort_pref = inputs['sortby']
 
   print("filters:", temp_pref, spirit, season, sort_pref, easy, tagsNo, tagsYes)
@@ -52,15 +51,8 @@ def queryendpoint():
   # if search terms
   if (len(query)):
     # if only search terms
-    if (not iced_filter and not hot_filter and spirit == "nopref" and season == "nopref" and easy == False and tagsNo == [] and tagsYes == []):
+    if (not iced_filter and not hot_filter and not sort_filter and spirit == "nopref" and season == "nopref" and tagsNo == [] and tagsYes == []):
       print("no filters")
-
-  print(iced_filter, hot_filter, sort_filter)
-
-  # if search terms
-  if (len(query)):
-    # if only search terms
-    if (not iced_filter and not hot_filter and not sort_filter and spirit == "nopref" and season == "nopref"):
       ranked = jaccard(query, tokenized_df.copy(), sim_feature_weights, [i for i in range(n_cocktails)],  treebank_tokenizer) # [score_drink0, score_drink1,]
     # if both search terms and filters
     else:
