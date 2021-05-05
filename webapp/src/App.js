@@ -9,7 +9,7 @@ import SearchReccomender from './components/SearchReccomender.js';
 
 function App() {
 
-  const default_input = { 'temp': 'nopref', 'query_string': '', 'base_spirit': 'nopref', 'ingredients': [], 'season': 'nopref' }
+  const default_input = { 'temp': 'nopref', 'query_string': '', 'base_spirit': 'nopref', 'ingredients': [], 'season': 'nopref', 'easy': '', 'tagsNo': [], 'tagsYes': []}
 
   const [inputs, setInputs] = useState(default_input)
   const [results, updateResults] = useState([])
@@ -18,7 +18,7 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (inputs.query_string === "" & inputs.temp === 'nopref' & inputs.base_spirit === 'nopref' & inputs.season === 'nopref') {
+    if (inputs.query_string === "" & inputs.temp === 'nopref' & inputs.base_spirit === 'nopref' & inputs.season === 'nopref' & inputs.tagsNo === [] & inputs.tagsYes === []) {
       alert("Please enter a search term or filter.");
     }
     axios.post('/query', inputs) // send inputs to backend
