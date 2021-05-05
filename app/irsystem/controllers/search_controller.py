@@ -4,6 +4,7 @@ from app.irsystem.models.helpers import NumpyEncoder as NumpyEncoder
 from app.irsystem.controllers.jaccard import *
 from app.irsystem.controllers.filters import *
 from app.irsystem.controllers.jaccard_helper import custom_dict, compute_edit_distance, clean_query
+import json
 
 project_name = "Liver Let Die - Personalized Cocktail Recommendations"
 net_id = "Annika Opsasnick (aro42), Callie Aboaf (cha46), Kaysie Yu (ky276), Simran Puri (sp2262), Yunyun Wang (yw458)"
@@ -33,20 +34,33 @@ def queryendpoint():
   tagsNo = inputs['tagsNo']
   tagsYes = inputs['tagsYes']
 
-  print("filters:", temp_pref, spirit, season, easy)
+  print("filters:", temp_pref, spirit, season, easy, tagsNo, tagsYes)
+  sort_pref = inputs['sortby']
+
+  print("filters:", temp_pref, spirit, season, sort_pref, easy, tagsNo, tagsYes)
 
   iced_filter = False
   hot_filter = False
+  sort_filter = False
   if temp_pref == "iced":
     iced_filter = True
   if temp_pref == "hot":
     hot_filter = True
+  if sort_pref == "rating":
+    sort_filter = True
 
   # if search terms
   if (len(query)):
     # if only search terms
     if (not iced_filter and not hot_filter and spirit == "nopref" and season == "nopref" and easy == False and tagsNo == [] and tagsYes == []):
       print("no filters")
+
+  print(iced_filter, hot_filter, sort_filter)
+
+  # if search terms
+  if (len(query)):
+    # if only search terms
+    if (not iced_filter and not hot_filter and not sort_filter and spirit == "nopref" and season == "nopref"):
       ranked = jaccard(query, tokenized_df.copy(), sim_feature_weights, [i for i in range(n_cocktails)],  treebank_tokenizer) # [score_drink0, score_drink1,]
     # if both search terms and filters
     else:
@@ -57,8 +71,31 @@ def queryendpoint():
     print("no search")
     ranked = filters(query, sm_df, iced_filter, hot_filter, spirit, season, easy, tagsNo, tagsYes, ) # [score_drink0, score_drink1,]
 
-  top_cocktails = top_scores(ranked) # [{name:"", ingredients:"[]", description:"",..},]
-  print(cocktail['name'] for cocktail in top_cocktails)
+  top_cocktails= top_scores(ranked) # [{name:"", ingredients:"[]", description:"",..},]
+  
+  print("old string form")
+  print(type(top_cocktails))
+
+  top_json = json.loads(top_cocktails)
+
+  # print(top_json)
+ 
+  #conditional statements for form inputs 
+  if (sort_pref == "rating"):
+  
+    top_10 = sorted(top_json, key = lambda x: x['rating'], reverse = True) #sort by social rating field 
+
+    print("ratings")
+    print([cocktail['rating'] for cocktail in top_10])
+    # print(top_10)
+    
+    #return back to string 
+    top_cocktails = json.dumps(top_10)
+
+    print("new string form")
+    print(type(top_cocktails))
+    print(top_cocktails)
+
 
   # if no cocktails match search find suggested terms
   search_suggestions = {}

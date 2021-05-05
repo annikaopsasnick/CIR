@@ -65,6 +65,10 @@ function App() {
 
             </div>
 
+            <div class="footer">
+              <p>Image Source: https://www.pexels.com/photo/blue-harp-decor-on-brown-wooden-table-63633/</p>
+            </div>
+
           </div>
           <div className="right">
             <div className="results-container">
@@ -75,10 +79,11 @@ function App() {
 
           </div>
         </section>
-        <div className = "bottom-left">
+        {/* <div className = "bottom-left">
           <p>insert citation url</p>
-        </div>
-      </body>
+        </div> */}
+        </body>
+
     </div>
 
 
