@@ -76,7 +76,7 @@ const Form = ({ inputs, setInputs, handleSubmit }) => {
         </div> */}
 
         <div class="input-pair">
-          <label for="tagsNo">Exclude All: </label>
+          <label for="tagsNo">Exclude Ingredients: </label>
           <Tags name="tagsNo" handleChangedTags={handleChangedTags} handleDeleteTags={handleDeleteTags}></Tags>
         </div>
 
