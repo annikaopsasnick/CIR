@@ -100,6 +100,13 @@ def tagNo_filter(indexes, inputs, tags, df=df):
     indexes_include = []
 
     words = [tag['name'].lower() for tag in tags]
+
+    # adding plurals to word list
+    for tag in tags:
+      words.append(tag['name'].lower() + "s")
+      words.append(tag['name'].lower()[:-1] + "ies")
+
+
     print("words", words)
     
     for idx in range(len(df)):
