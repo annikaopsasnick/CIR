@@ -40,6 +40,8 @@ class Tags extends React.Component {
         { id: 26, name: "Egg" },
         { id: 27, name: "Coffee" },
         { id: 28, name: "Espresso" },
+        { id: 29, name: "Peppermint" },
+        { id: 30, name: "Mint" },
       ]
     }
     // this.reactTags = React.createRef()

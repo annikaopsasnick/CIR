@@ -91,7 +91,7 @@ def easy_filter(indexes, df=df):
     
     for idx in range(len(df)):
       if idx in indexes:
-        if df.loc[idx, ['ingredients']][0].count('/n') <= 5:
+        if df.loc[idx, ['ingredients']][0].count(',') <= 4:
           indexes_include.append(idx)
     return indexes_include
 
@@ -103,6 +103,7 @@ def tagNo_filter(indexes, inputs, tags, df=df):
     # adding plurals to word list
     for tag in tags:
       words.append(tag['name'].lower() + "s")
+      words.append(tag['name'].lower() + "es")
       words.append(tag['name'].lower()[:-1] + "ies")
 
 
