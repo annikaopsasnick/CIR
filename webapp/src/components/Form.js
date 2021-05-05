@@ -23,19 +23,15 @@ const Form = ({ inputs, setInputs, handleSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div class="input-pair">
-        <label>
-          Search:
-            <input type="text" name="query_string" placeholder="Ex: fruity fun lemon" onChange={handleChange} spellcheck="true" />
-        </label>
+      <div class="input-pair search">
+        <label>Search</label>
+        <input class="search-input" type="text" name="query_string" placeholder="Ex: fruity fun lemon" onChange={handleChange} spellcheck="true" />
       </div>
 
       <div class="filter-container">
-        <label>Filters:</label>
+        <p>Advanced Search</p>
         <div class="input-pair">
-          <label>
-            Base Spirit:
-            </label>
+          <label>Base Spirit</label>
           <select id="base_spirit" name="base_spirit" onChange={handleChange}>
             <option value="nopref" selected="selected">No Preference</option>
             <option value="vodka">Vodka</option>
@@ -53,25 +49,24 @@ const Form = ({ inputs, setInputs, handleSubmit }) => {
         <div class="input-pair">
           <label for="temp">Temperature: </label>
           <select name="temp" id="temp" onChange={handleChange}>
+            <option value="nopref" selected="selected">No Preference</option>
             <option value="iced">Iced</option>
             <option value="hot">Hot</option>
-            <option value="nopref" selected="selected">No Preference</option>
           </select>
         </div>
 
         <div class="input-pair">
-          <label for="season">Season: </label>
+          <label for="season">Season</label>
           <select name="season" id="season" onChange={handleChange}>
+            <option value="nopref" selected="selected">No Preference</option>
             <option value="winter">Winter</option>
             <option value="spring">Spring</option>
             <option value="summer">Summer</option>
             <option value="fall">Fall</option>
-            <option value="nopref" selected="selected">No Preference</option>
           </select>
         </div>
+        <button class="submit-form" type="submit" value="Submit">Submit</button>
       </div>
-
-      <button type="submit" value="Submit">Submit</button>
     </form>
   );
 }

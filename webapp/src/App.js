@@ -48,7 +48,6 @@ function App() {
   return (
 
     <div className="App">
-
       <body>
         <section className="container">
 
@@ -66,7 +65,7 @@ function App() {
             </div>
 
             <div class="footer">
-              <p>Image Source: https://www.pexels.com/photo/blue-harp-decor-on-brown-wooden-table-63633/</p>
+              <p>Background Image Source: https://www.pexels.com/photo/blue-harp-decor-on-brown-wooden-table-63633/</p>
             </div>
 
           </div>
