@@ -47,27 +47,51 @@ const Form = ({ inputs, setInputs, handleSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div class="input-pair search">
+      <div class="input-pair-search search">
         <label>Search</label>
         <input class="search-input" type="text" name="query_string" placeholder="Ex: fruity fun lemon" onChange={handleChange} spellcheck="true" />
       </div>
 
       <div class="filter-container">
         <p>Advanced Search</p>
-        <div class="input-pair">
-          <label>Base Spirit</label>
-          <select id="base_spirit" name="base_spirit" onChange={handleChange}>
-            <option value="nopref" selected="selected">No Preference</option>
-            <option value="vodka">Vodka</option>
-            <option value="tequila">Tequila</option>
-            <option value="gin">Gin</option>
-            <option value="rum">Rum</option>
-            <option value="whiskey">Whiskey</option>
-            <option value="brandy">Brandy</option>
-            <option value="liqueur">Liqueur</option>
-            <option value="wine">Wine</option>
-            <option value="lowalc">Low Alcohol</option>
-          </select>
+        <div class="filter-container-flex">
+        {/* Left column */}
+        <div class="left-filter-col">
+          <div class="input-pair">          
+            <label>Base Spirit</label>
+            <select id="base_spirit" name="base_spirit" onChange={handleChange}>
+              <option value="nopref" selected="selected">No Preference</option>
+              <option value="vodka">Vodka</option>
+              <option value="tequila">Tequila</option>
+              <option value="gin">Gin</option>
+              <option value="rum">Rum</option>
+              <option value="whiskey">Whiskey</option>
+              <option value="brandy">Brandy</option>
+              <option value="liqueur">Liqueur</option>
+              <option value="wine">Wine</option>
+              <option value="lowalc">Low Alcohol</option>
+            </select>
+          </div>
+
+          <div class="input-pair">
+            <label for="temp">Temperature</label>
+            <select name="temp" id="temp" onChange={handleChange}>
+              <option value="nopref" selected="selected">No Preference</option>
+              <option value="iced">Iced</option>
+              <option value="hot">Hot</option>
+            </select>
+          </div>
+
+          <div class="input-pair">
+            <label for="season">Season</label>
+            <select name="season" id="season" onChange={handleChange}>
+              <option value="nopref" selected="selected">No Preference</option>
+              <option value="winter">Winter</option>
+              <option value="spring">Spring</option>
+              <option value="summer">Summer</option>
+              <option value="fall">Fall</option>
+            </select>
+          </div>
         </div>
 
         {/* <div class="input-pair">
@@ -75,45 +99,29 @@ const Form = ({ inputs, setInputs, handleSubmit }) => {
           <Tags name="tagsYes" handleChangedTags={handleChangedTags} handleDeleteTags={handleDeleteTags}></Tags>
         </div> */}
 
-        <div class="input-pair">
-          <label for="tagsNo">Exclude All: </label>
-          <Tags name="tagsNo" handleChangedTags={handleChangedTags} handleDeleteTags={handleDeleteTags}></Tags>
+        {/* Right column */}
+        <div class="right-filter-col">
+          <div class = "input-pair">
+            <label for="sortby">Sort Reviews By</label>
+            <select name = "sortby" id = "sortby" onChange={handleChange}>
+              <option value="nopref" selected="selected">No Preference</option>
+              <option value = "best_results">Best Results</option>
+              <option value = "rating">Star Ratings</option>
+            </select>
+          </div>
+
+          <div class="input-pair">
+            <label for="tagsNo">Exclude All</label>
+            <Tags name="tagsNo" handleChangedTags={handleChangedTags} handleDeleteTags={handleDeleteTags}></Tags>
+          </div>
+
+          <div class="input-pair-ingredients">
+            <label for="easy">5 or Less Ingredients</label>
+            <input class="checkbox" type="checkbox" name="easy" id="easy" onChange={handleChecked}></input>
+          </div>
+          
+          
         </div>
-
-
-        <div class="input-pair">
-          <label for="easy">5 or Less Ingredients</label>
-          <input type="checkbox" name="easy" id="easy" onChange={handleChecked}></input>
-        </div>
-        <br></br>
-
-        <div class="input-pair">
-          <label for="temp">Temperature: </label>
-          <select name="temp" id="temp" onChange={handleChange}>
-            <option value="nopref" selected="selected">No Preference</option>
-            <option value="iced">Iced</option>
-            <option value="hot">Hot</option>
-          </select>
-        </div>
-
-
-        <div class="input-pair">
-          <label for="season">Season</label>
-          <select name="season" id="season" onChange={handleChange}>
-            <option value="nopref" selected="selected">No Preference</option>
-            <option value="winter">Winter</option>
-            <option value="spring">Spring</option>
-            <option value="summer">Summer</option>
-            <option value="fall">Fall</option>
-          </select>
-        </div>
-        <div class = "input-pair">
-          <label for="sortby">Sort By: </label>
-          <select name = "sortby" id = "sortby" onChange={handleChange}>
-            <option value = "rating"> Rating</option>
-            <option value = "best_results">Best Results</option>
-            <option value="nopref" selected="selected">No Preference</option>
-          </select>
         </div>
         <button class="submit-form" type="submit" value="Submit">Submit</button>
       </div>

@@ -18,7 +18,26 @@ code {
 
 .input-pair {
   display:flex;
+  flex-direction: column;
+  width: 90%;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.input-pair-search {
+  display:flex;
   flex-direction: row;
+  width: 90%;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.input-pair-ingredients {
+  display:flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 10px;
 }
 
 img {
@@ -78,6 +97,11 @@ Formating for Left Portion of Page (title and form)
   padding: 15px;
 }
 
+.filter-container-flex {
+  display: flex;
+  flex-direction: row;
+}
+
 .filter-container p{
   text-align: left;
   padding: 0;
@@ -99,9 +123,31 @@ Formating for Left Portion of Page (title and form)
   text-align: center;
 }
 
-.input-pair label {
-  font-size: 1.5vw;
+.left-filter-col, .right-filter-col {
+  flex: 1;
+}
+
+.input-pair label, .input-pair-ingredients label {
+  font-size: 1.25vw;
   font-weight: 500;
+  text-align: left;
+}
+
+.input-pair-ingredients label {
+ padding-top: 2px;
+}
+
+.input-pair select, .react-tags__search-input {
+  font-family: "Playfair Display",serif !important;
+  padding: 0 5px 0 10px;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 10px !important;
+  margin-top: 5px;
+}
+
+.react-tags__search-input {
+  width: 85% !important;
 }
 
 .search {
@@ -110,9 +156,17 @@ Formating for Left Portion of Page (title and form)
 
 .search-input {
   margin: 0 0 0 10px;
+  padding: 0 10px;
   width: 90%;
   border: none;
   border-radius: 5px;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  border: none;
 }
 
 .submit-form {
@@ -120,17 +174,22 @@ Formating for Left Portion of Page (title and form)
   border: none;
   border-radius: 5px;
   padding: 7px 10px;
-  margin-top: 25px;
+  margin-top: 10px;
   background-color: rgba(211, 182, 182, 0.7);
+  font-family: "Playfair Display",serif !important;
 }
 
 /* TODO add over state */
-/* .submit-form:hover {
-  font-size: 2vw;
-  border-radius: 10px;
-  background-color: rgba(116,73,73,.7);
-  color: white
-} */
+submit-form:hover {
+  font-size: 1.5vw;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-top: 10px;
+  background-color: rgba(116, 73, 73, 0.7);
+  color: black;
+  font-family: "Playfair Display",serif !important;
+}
 
 .bottom-left p {
   color:white!important;
